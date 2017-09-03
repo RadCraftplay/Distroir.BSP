@@ -17,7 +17,7 @@ Distroir.BSP library allows you to easily read and edit BSP files. Things you ca
 
 #### Reading BSP file header
 
-There are few ways that you can read BSP header. Example code will show both ways you can do it:
+There are few ways that you can read BSP header. Example code bellow shows two of them:
 
 ```csharp
 using (FileStream fs = new FileStream(filename, FileMode.Open))
