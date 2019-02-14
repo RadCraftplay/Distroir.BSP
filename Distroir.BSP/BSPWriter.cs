@@ -22,7 +22,7 @@ IN THE SOFTWARE.
 */
 using System.IO;
 
-namespace Distroir.BSP
+namespace Distroir.Bsp
 {
     public class BSPWriter
     {

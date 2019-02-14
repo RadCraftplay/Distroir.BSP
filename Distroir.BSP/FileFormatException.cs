@@ -23,7 +23,7 @@ IN THE SOFTWARE.
 using System;
 using System.Runtime.Serialization;
 
-namespace Distroir.BSP
+namespace Distroir.Bsp
 {
     [Serializable]
     internal class FileFormatException : Exception
