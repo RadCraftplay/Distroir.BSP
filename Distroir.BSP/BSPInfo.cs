@@ -22,7 +22,7 @@ IN THE SOFTWARE.
 */
 namespace Distroir.Bsp
 {
-    public class BSPInfo
+    public class BspInfo
     {
         /// <summary>
         /// BSP file identifier

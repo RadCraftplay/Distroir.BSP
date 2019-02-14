@@ -22,7 +22,7 @@ IN THE SOFTWARE.
 */
 namespace Distroir.Bsp
 {
-    public class BSPOffsets
+    public class BspOffsets
     {
         /// <summary>
         /// Calculates offset of lump
@@ -39,7 +39,7 @@ namespace Distroir.Bsp
         /// </summary>
         /// <param name="lump">BSP Lump</param>
         /// <returns></returns>
-        public static int CalculateLumpOffset(BSPLumps lump)
+        public static int CalculateLumpOffset(BspLumps lump)
         {
             return CalculateLumpOffset((int)lump);
         }

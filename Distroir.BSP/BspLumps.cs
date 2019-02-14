@@ -22,7 +22,7 @@ IN THE SOFTWARE.
 */
 namespace Distroir.Bsp
 {
-    public enum BSPLumps : int
+    public enum BspLumps : int
     {
         /// <summary>
         /// Map entities

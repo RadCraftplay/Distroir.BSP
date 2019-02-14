@@ -24,15 +24,15 @@ using System.IO;
 
 namespace Distroir.Bsp
 {
-    public class BSPReader
+    public class BspReader
     {
         /// <summary>
         /// Reads BSP info from Stream Reader
         /// </summary>
         /// <param name="reader">Stream Reader to read from</param>
-        public static BSPInfo ReadInfo(BinaryReader reader)
+        public static BspInfo ReadInfo(BinaryReader reader)
         {
-            BSPInfo info = new BSPInfo();
+            BspInfo info = new BspInfo();
 
             //Read identifier
             info.Identifier = reader.ReadInt32();
@@ -66,7 +66,7 @@ namespace Distroir.Bsp
         /// Reads BSP info from Stream Reader
         /// </summary>
         /// <param name="fs">FileStream to read from</param>
-        public static BSPInfo ReadInfo(FileStream fs)
+        public static BspInfo ReadInfo(FileStream fs)
         {
             using (BinaryReader r = new BinaryReader(fs))
             {
@@ -78,7 +78,7 @@ namespace Distroir.Bsp
         /// Reads BSP info from file
         /// </summary>
         /// <param name="filename">Name of file to open</param>
-        public static BSPInfo ReadInfo(string filename)
+        public static BspInfo ReadInfo(string filename)
         {
             using (FileStream fs = new FileStream(filename, FileMode.Open))
             {
@@ -115,10 +115,10 @@ namespace Distroir.Bsp
         /// <param name="reader">Binary Reader to read from</param>
         /// <param name="lumpId">Lump Id</param>
         /// <returns></returns>
-        public static Lump ReadLump(BinaryReader reader, BSPLumps lumpId)
+        public static Lump ReadLump(BinaryReader reader, BspLumps lumpId)
         {
             //Calculate and set offset
-            reader.BaseStream.Position = BSPOffsets.CalculateLumpOffset(lumpId);
+            reader.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
             //Read lump
             return ReadLump(reader);
         }
@@ -132,7 +132,7 @@ namespace Distroir.Bsp
         public static Lump ReadLump(BinaryReader reader, int lumpId)
         {
             //Calculate and set offset
-            reader.BaseStream.Position = BSPOffsets.CalculateLumpOffset(lumpId);
+            reader.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
             //Read lump
             return ReadLump(reader);
         }
