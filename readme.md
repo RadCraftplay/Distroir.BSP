@@ -1,4 +1,6 @@
 # Distroir.BSP
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FRadCraftplay%2FDistroir.BSP.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FRadCraftplay%2FDistroir.BSP?ref=badge_shield)
+
 
 Open-source library for reading and editing BSP files
 
@@ -109,3 +111,7 @@ using (FileStream output = new FileStream(filename, FileMode.Append))
 }
 ```
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FRadCraftplay%2FDistroir.BSP.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FRadCraftplay%2FDistroir.BSP?ref=badge_large)
