@@ -48,7 +48,7 @@ namespace Distroir.Bsp
             info.Version = reader.ReadInt32();
 
             //Read game lumps
-            info.Lumps = new Lump[64];
+            info.Lumps = new BspLump[64];
 
             for (int i = 0; i < 64; i++)
             {
@@ -94,10 +94,10 @@ namespace Distroir.Bsp
         /// </summary>
         /// <param name="r">Binary Reader to read from</param>
         /// <returns></returns>
-        static Lump ReadLump(BinaryReader r)
+        static BspLump ReadLump(BinaryReader r)
         {
             //Create new lump
-            Lump l = new Lump();
+            BspLump l = new BspLump();
 
             //Read  lump data
             l.FileOffset = r.ReadInt32();
@@ -115,7 +115,7 @@ namespace Distroir.Bsp
         /// <param name="reader">Binary Reader to read from</param>
         /// <param name="lumpId">Lump Id</param>
         /// <returns></returns>
-        public static Lump ReadLump(BinaryReader reader, BspLumps lumpId)
+        public static BspLump ReadLump(BinaryReader reader, BspLumps lumpId)
         {
             //Calculate and set offset
             reader.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
@@ -129,7 +129,7 @@ namespace Distroir.Bsp
         /// <param name="reader">Binary Reader to read from</param>
         /// <param name="lumpId">Lump Id</param>
         /// <returns></returns>
-        public static Lump ReadLump(BinaryReader reader, int lumpId)
+        public static BspLump ReadLump(BinaryReader reader, int lumpId)
         {
             //Calculate and set offset
             reader.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
@@ -143,7 +143,7 @@ namespace Distroir.Bsp
         /// <param name="reader">Binary Reader to read from</param>
         /// <param name="lump">Lump informations</param>
         /// <returns></returns>
-        public static byte[] ReadLumpData(BinaryReader reader, Lump lump)
+        public static byte[] ReadLumpData(BinaryReader reader, BspLump lump)
         {
             //Set offset
             reader.BaseStream.Position = lump.FileOffset;

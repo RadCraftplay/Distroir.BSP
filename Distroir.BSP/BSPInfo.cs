@@ -35,7 +35,7 @@ namespace Distroir.Bsp
         /// <summary>
         /// lump directory array
         /// </summary>
-        public Lump[] Lumps;
+        public BspLump[] Lumps;
         /// <summary>
         /// Map's revision number
         /// </summary>

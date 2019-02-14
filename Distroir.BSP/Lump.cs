@@ -22,7 +22,7 @@ IN THE SOFTWARE.
 */
 namespace Distroir.Bsp
 {
-    public class Lump
+    public class BspLump
     {
         /// <summary>
         /// Offset into file (bytes)

@@ -40,7 +40,7 @@ namespace Distroir.Bsp
             w.Write(i.Identifier);
             w.Write(i.Version);
             //Write lump informations
-            foreach (Lump l in i.Lumps)
+            foreach (BspLump l in i.Lumps)
                 WriteLump(w, l);
             //Write map revision number
             w.Write(i.MapRevision);
@@ -51,7 +51,7 @@ namespace Distroir.Bsp
         /// </summary>
         /// <param name="w">Binary writer to write to</param>
         /// <param name="l">Lump informations</param>
-        static void WriteLump(BinaryWriter w, Lump l)
+        static void WriteLump(BinaryWriter w, BspLump l)
         {
             //Write lump data
             w.Write(l.FileOffset);
@@ -66,7 +66,7 @@ namespace Distroir.Bsp
         /// <param name="writer">Binary writer to write to</param>
         /// <param name="info">Lump informations</param>
         /// <param name="lumpId">Id of lump</param>
-        public static void WriteLump(BinaryWriter writer, Lump info, int lumpId)
+        public static void WriteLump(BinaryWriter writer, BspLump info, int lumpId)
         {
             //Set offset
             writer.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
@@ -80,7 +80,7 @@ namespace Distroir.Bsp
         /// <param name="writer">Binary writer to write to</param>
         /// <param name="info">Lump informations</param>
         /// <param name="lumpId">Id of lump</param>
-        public static void WriteLump(BinaryWriter writer, Lump info, BspLumps lumpId)
+        public static void WriteLump(BinaryWriter writer, BspLump info, BspLumps lumpId)
         {
             //Write lump informations
             WriteLump(writer, info, (int)lumpId);
@@ -109,10 +109,10 @@ namespace Distroir.Bsp
             //BSP informations
             BspInfo info;
             //Collection of all lumps
-            Lump[] lumps = new Lump[64];
+            BspLump[] lumps = new BspLump[64];
 
             //Old lump data
-            Lump old = new Lump();
+            BspLump old = new BspLump();
 
             //Read lump data
             using (BinaryReader r = new BinaryReader(input))
