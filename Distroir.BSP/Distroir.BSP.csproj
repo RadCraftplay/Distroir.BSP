@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <Authors>Distroir</Authors>
     <Company />
     <RepositoryUrl>https://github.com/RadCraftplay/Distroir.BSP.git</RepositoryUrl>
