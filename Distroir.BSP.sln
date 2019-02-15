@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28531.58
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Distroir.BSP", "Distroir.BSP\Distroir.BSP.csproj", "{C1EE7955-C2DA-4637-AD11-708B40C24656}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Distroir.BSP", "Distroir.Bsp\Distroir.BSP.csproj", "{895E7CC4-EE3F-468A-9A96-F743A6FB272A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,12 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C1EE7955-C2DA-4637-AD11-708B40C24656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C1EE7955-C2DA-4637-AD11-708B40C24656}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C1EE7955-C2DA-4637-AD11-708B40C24656}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C1EE7955-C2DA-4637-AD11-708B40C24656}.Release|Any CPU.Build.0 = Release|Any CPU
+		{895E7CC4-EE3F-468A-9A96-F743A6FB272A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{895E7CC4-EE3F-468A-9A96-F743A6FB272A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{895E7CC4-EE3F-468A-9A96-F743A6FB272A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{895E7CC4-EE3F-468A-9A96-F743A6FB272A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AA2995E7-79E9-4BA5-99F4-57BB455B5480}
 	EndGlobalSection
 EndGlobal

@@ -22,26 +22,23 @@ IN THE SOFTWARE.
 */
 namespace Distroir.Bsp
 {
-    public class BspOffsets
+    public class BspLump
     {
         /// <summary>
-        /// Calculates offset of lump
+        /// Offset into file (bytes)
         /// </summary>
-        /// <param name="lumpId">Id of lump (from 0 to 63)</param>
-        /// <returns></returns>
-        public static int CalculateLumpOffset(int lumpId)
-        {
-            return 8 + 16 * lumpId;
-        }
-
+        public int FileOffset;
         /// <summary>
-        /// Calculates offset of lump
+        /// Length of lump (bytes)
         /// </summary>
-        /// <param name="lump">BSP Lump</param>
-        /// <returns></returns>
-        public static int CalculateLumpOffset(BspLumps lump)
-        {
-            return CalculateLumpOffset((int)lump);
-        }
+        public int FileLength;
+        /// <summary>
+        /// Lump format version
+        /// </summary>
+        public int Version;
+        /// <summary>
+        /// Lump ident code
+        /// </summary>
+        public int fourCC;
     }
 }

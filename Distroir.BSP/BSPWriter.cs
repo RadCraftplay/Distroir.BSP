@@ -1,32 +1,37 @@
 ﻿/*
-Distroir.BSP
-Copyright (C) 2017 Distroir
+MIT License
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Copyright (c) 2017-2019 Distroir
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following conditions:
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
+EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
 */
 using System.IO;
 
-namespace Distroir.BSP
+namespace Distroir.Bsp
 {
-    public class BSPWriter
+    public class BspWriter
     {
         /// <summary>
         /// Writes BSP File header
         /// </summary>
         /// <param name="w">Binary Writer to write to</param>
         /// <param name="i">Informations about BSP info</param>
-        public static void WriteHeader(BinaryWriter w, BSPInfo i)
+        public static void WriteHeader(BinaryWriter w, BspInfo i)
         {
             //Set offset
             w.BaseStream.Position = 0;
@@ -35,7 +40,7 @@ namespace Distroir.BSP
             w.Write(i.Identifier);
             w.Write(i.Version);
             //Write lump informations
-            foreach (Lump l in i.Lumps)
+            foreach (BspLump l in i.Lumps)
                 WriteLump(w, l);
             //Write map revision number
             w.Write(i.MapRevision);
@@ -46,7 +51,7 @@ namespace Distroir.BSP
         /// </summary>
         /// <param name="w">Binary writer to write to</param>
         /// <param name="l">Lump informations</param>
-        static void WriteLump(BinaryWriter w, Lump l)
+        static void WriteLump(BinaryWriter w, BspLump l)
         {
             //Write lump data
             w.Write(l.FileOffset);
@@ -61,10 +66,10 @@ namespace Distroir.BSP
         /// <param name="writer">Binary writer to write to</param>
         /// <param name="info">Lump informations</param>
         /// <param name="lumpId">Id of lump</param>
-        public static void WriteLump(BinaryWriter writer, Lump info, int lumpId)
+        public static void WriteLump(BinaryWriter writer, BspLump info, int lumpId)
         {
             //Set offset
-            writer.BaseStream.Position = BSPOffsets.CalculateLumpOffset(lumpId);
+            writer.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
             //Write lump data
             WriteLump(writer, info);
         }
@@ -75,7 +80,7 @@ namespace Distroir.BSP
         /// <param name="writer">Binary writer to write to</param>
         /// <param name="info">Lump informations</param>
         /// <param name="lumpId">Id of lump</param>
-        public static void WriteLump(BinaryWriter writer, Lump info, BSPLumps lumpId)
+        public static void WriteLump(BinaryWriter writer, BspLump info, BspLumps lumpId)
         {
             //Write lump informations
             WriteLump(writer, info, (int)lumpId);
@@ -102,18 +107,18 @@ namespace Distroir.BSP
             byte[] afterLump;
 
             //BSP informations
-            BSPInfo info;
+            BspInfo info;
             //Collection of all lumps
-            Lump[] lumps = new Lump[64];
+            BspLump[] lumps = new BspLump[64];
 
             //Old lump data
-            Lump old = new Lump();
+            BspLump old = new BspLump();
 
             //Read lump data
             using (BinaryReader r = new BinaryReader(input))
             {
                 //Read BSP informations
-                info = BSPReader.ReadInfo(r);
+                info = BspReader.ReadInfo(r);
                 lumps = info.Lumps;
 
                 //Get old lump

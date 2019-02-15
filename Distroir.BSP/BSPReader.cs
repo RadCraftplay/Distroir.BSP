@@ -1,33 +1,38 @@
 ﻿/*
-Distroir.BSP
-Copyright (C) 2017 Distroir
+MIT License
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+Copyright (c) 2017-2019 Distroir
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software
+and associated documentation files (the "Software"), to deal in the Software without restriction,
+including without limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom the Software
+is furnished to do so, subject to the following conditions:
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO
+EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES
+OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
 */
 using System.IO;
 
-namespace Distroir.BSP
+namespace Distroir.Bsp
 {
-    public class BSPReader
+    public class BspReader
     {
         /// <summary>
         /// Reads BSP info from Stream Reader
         /// </summary>
         /// <param name="reader">Stream Reader to read from</param>
-        public static BSPInfo ReadInfo(BinaryReader reader)
+        public static BspInfo ReadInfo(BinaryReader reader)
         {
-            BSPInfo info = new BSPInfo();
+            BspInfo info = new BspInfo();
 
             //Read identifier
             info.Identifier = reader.ReadInt32();
@@ -43,7 +48,7 @@ namespace Distroir.BSP
             info.Version = reader.ReadInt32();
 
             //Read game lumps
-            info.Lumps = new Lump[64];
+            info.Lumps = new BspLump[64];
 
             for (int i = 0; i < 64; i++)
             {
@@ -61,7 +66,7 @@ namespace Distroir.BSP
         /// Reads BSP info from Stream Reader
         /// </summary>
         /// <param name="fs">FileStream to read from</param>
-        public static BSPInfo ReadInfo(FileStream fs)
+        public static BspInfo ReadInfo(FileStream fs)
         {
             using (BinaryReader r = new BinaryReader(fs))
             {
@@ -73,7 +78,7 @@ namespace Distroir.BSP
         /// Reads BSP info from file
         /// </summary>
         /// <param name="filename">Name of file to open</param>
-        public static BSPInfo ReadInfo(string filename)
+        public static BspInfo ReadInfo(string filename)
         {
             using (FileStream fs = new FileStream(filename, FileMode.Open))
             {
@@ -89,10 +94,10 @@ namespace Distroir.BSP
         /// </summary>
         /// <param name="r">Binary Reader to read from</param>
         /// <returns></returns>
-        static Lump ReadLump(BinaryReader r)
+        static BspLump ReadLump(BinaryReader r)
         {
             //Create new lump
-            Lump l = new Lump();
+            BspLump l = new BspLump();
 
             //Read  lump data
             l.FileOffset = r.ReadInt32();
@@ -110,10 +115,10 @@ namespace Distroir.BSP
         /// <param name="reader">Binary Reader to read from</param>
         /// <param name="lumpId">Lump Id</param>
         /// <returns></returns>
-        public static Lump ReadLump(BinaryReader reader, BSPLumps lumpId)
+        public static BspLump ReadLump(BinaryReader reader, BspLumps lumpId)
         {
             //Calculate and set offset
-            reader.BaseStream.Position = BSPOffsets.CalculateLumpOffset(lumpId);
+            reader.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
             //Read lump
             return ReadLump(reader);
         }
@@ -124,10 +129,10 @@ namespace Distroir.BSP
         /// <param name="reader">Binary Reader to read from</param>
         /// <param name="lumpId">Lump Id</param>
         /// <returns></returns>
-        public static Lump ReadLump(BinaryReader reader, int lumpId)
+        public static BspLump ReadLump(BinaryReader reader, int lumpId)
         {
             //Calculate and set offset
-            reader.BaseStream.Position = BSPOffsets.CalculateLumpOffset(lumpId);
+            reader.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
             //Read lump
             return ReadLump(reader);
         }
@@ -138,7 +143,7 @@ namespace Distroir.BSP
         /// <param name="reader">Binary Reader to read from</param>
         /// <param name="lump">Lump informations</param>
         /// <returns></returns>
-        public static byte[] ReadLumpData(BinaryReader reader, Lump lump)
+        public static byte[] ReadLumpData(BinaryReader reader, BspLump lump)
         {
             //Set offset
             reader.BaseStream.Position = lump.FileOffset;
