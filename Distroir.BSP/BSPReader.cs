@@ -75,6 +75,19 @@ namespace Distroir.Bsp
         }
 
         /// <summary>
+        /// Reads BSP info from Stream
+        /// </summary>
+        /// <param name="s">Stream to read from</param>
+        /// <returns></returns>
+        public static BspInfo ReadInfo(Stream s)
+        {
+            using (BinaryReader r = new BinaryReader(s))
+            {
+                return ReadInfo(r);
+            }
+        }
+
+        /// <summary>
         /// Reads BSP info from file
         /// </summary>
         /// <param name="filename">Name of file to open</param>
