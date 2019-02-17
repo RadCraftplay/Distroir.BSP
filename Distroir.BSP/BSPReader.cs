@@ -26,6 +26,18 @@ namespace Distroir.Bsp
 {
     public class BspReader
     {
+        private BinaryReader reader;
+
+        public BspReader(Stream input)
+        {
+            reader = new BinaryReader(input);
+        }
+
+        public BspReader(string filename)
+        {
+            reader = new BinaryReader(new FileStream(filename, FileMode.Open));
+        }
+
         /// <summary>
         /// Reads BSP info from Stream Reader
         /// </summary>
