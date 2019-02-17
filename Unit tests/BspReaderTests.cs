@@ -31,13 +31,6 @@ namespace UnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(FileNotFoundException))]
-        public void CtorReadNonExistingFile()
-        {
-            BspReader r = new BspReader("/dev/null/nonexistingfile");
-        }
-
-        [TestMethod]
         public void ReadInfo()
         {
             BspReader r = new BspReader(MAP_FILENAME);
