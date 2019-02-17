@@ -28,6 +28,7 @@ namespace Distroir.Bsp
     public class BspReader : IDisposable
     {
         private BinaryReader reader;
+        private BspInfo cachedInfo;
 
         public BspReader(Stream input)
         {
@@ -45,10 +46,17 @@ namespace Distroir.Bsp
         }
 
         /// <summary>
-        /// Reads BSP info from Stream Reader
+        /// Reads BSP info from file
         /// </summary>
-        /// <param name="reader">Stream Reader to read from</param>
-        public static BspInfo ReadInfo(BinaryReader reader)
+        public BspInfo ReadInfo()
+        {
+            if (cachedInfo == null)
+                cachedInfo = RefreshInfo();
+
+            return cachedInfo;
+        }
+
+        private BspInfo RefreshInfo()
         {
             BspInfo info = new BspInfo();
 
@@ -70,7 +78,7 @@ namespace Distroir.Bsp
 
             for (int i = 0; i < 64; i++)
             {
-                info.Lumps[i] = ReadLump(reader);
+                info.Lumps[i] = ReadLump();
             }
 
             //Read map revision number
@@ -79,65 +87,24 @@ namespace Distroir.Bsp
             //Return value
             return info;
         }
-
-        /// <summary>
-        /// Reads BSP info from Stream Reader
-        /// </summary>
-        /// <param name="fs">FileStream to read from</param>
-        public static BspInfo ReadInfo(FileStream fs)
-        {
-            using (BinaryReader r = new BinaryReader(fs))
-            {
-                return ReadInfo(r);
-            }
-        }
-
-        /// <summary>
-        /// Reads BSP info from Stream
-        /// </summary>
-        /// <param name="s">Stream to read from</param>
-        /// <returns></returns>
-        public static BspInfo ReadInfo(Stream s)
-        {
-            using (BinaryReader r = new BinaryReader(s))
-            {
-                return ReadInfo(r);
-            }
-        }
-
-        /// <summary>
-        /// Reads BSP info from file
-        /// </summary>
-        /// <param name="filename">Name of file to open</param>
-        public static BspInfo ReadInfo(string filename)
-        {
-            using (FileStream fs = new FileStream(filename, FileMode.Open))
-            {
-                using (BinaryReader r = new BinaryReader(fs))
-                {
-                    return ReadInfo(r);
-                }
-            }
-        }
-
         /// <summary>
         /// Reads lump from Binary Reader
         /// </summary>
         /// <param name="r">Binary Reader to read from</param>
         /// <returns></returns>
-        static BspLump ReadLump(BinaryReader r)
+        private BspLump ReadLump()
         {
             //Create new lump
-            BspLump l = new BspLump();
+            BspLump lump = new BspLump();
 
             //Read  lump data
-            l.FileOffset = r.ReadInt32();
-            l.FileLength = r.ReadInt32();
-            l.Version = r.ReadInt32();
-            l.fourCC = r.ReadInt32();
+            lump.FileOffset = reader.ReadInt32();
+            lump.FileLength = reader.ReadInt32();
+            lump.Version = reader.ReadInt32();
+            lump.fourCC = reader.ReadInt32();
 
             //Return value
-            return l;
+            return lump;
         }
 
         /// <summary>
