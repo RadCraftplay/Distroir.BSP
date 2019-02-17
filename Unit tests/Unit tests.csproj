@@ -17,4 +17,10 @@
     <ProjectReference Include="..\Distroir.Bsp\Distroir.BSP.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="testmap.bsp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
