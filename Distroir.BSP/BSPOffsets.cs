@@ -37,9 +37,9 @@ namespace Distroir.Bsp
         /// <summary>
         /// Calculates offset of lump
         /// </summary>
-        /// <param name="lump">BSP Lump</param>
+        /// <param name="lump">Lump type</param>
         /// <returns></returns>
-        public static int CalculateLumpOffset(BspLumps lump)
+        public static int CalculateLumpOffset(BspLumpType lump)
         {
             return CalculateLumpOffset((int)lump);
         }

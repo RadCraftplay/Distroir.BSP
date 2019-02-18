@@ -111,7 +111,7 @@ namespace Distroir.Bsp
         /// Reads lump info from file
         /// </summary>
         /// <param name="lumpId">Lump type</param>
-        public BspLump ReadLumpInfo(BspLumps lumpType)
+        public BspLump ReadLumpInfo(BspLumpType lumpType)
         {
             return ReadLumpInfo((int)lumpType);
         }
@@ -149,7 +149,7 @@ namespace Distroir.Bsp
         /// Reads lump data
         /// </summary>
         /// <param name="lumpType">Lump to read</param>
-        public byte[] ReadLumpData(BspLumps lumpType)
+        public byte[] ReadLumpData(BspLumpType lumpType)
         {
             return ReadLumpData((int)lumpType);
         }

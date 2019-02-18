@@ -80,7 +80,7 @@ namespace Distroir.Bsp
         /// <param name="writer">Binary writer to write to</param>
         /// <param name="info">Lump informations</param>
         /// <param name="lumpId">Id of lump</param>
-        public static void WriteLump(BinaryWriter writer, BspLump info, BspLumps lumpId)
+        public static void WriteLump(BinaryWriter writer, BspLump info, BspLumpType lumpId)
         {
             //Write lump informations
             WriteLump(writer, info, (int)lumpId);

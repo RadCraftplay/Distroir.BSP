@@ -48,7 +48,7 @@ namespace UnitTests
         public void ReadLumpInfo()
         {
             BspReader r = new BspReader(MAP_FILENAME);
-            var lump = r.ReadLumpInfo(BspLumps.LUMP_PAKFILE);
+            var lump = r.ReadLumpInfo(BspLumpType.LUMP_PAKFILE);
             r.Dispose();
 
             Assert.IsInstanceOfType(lump, typeof(BspLump));
@@ -70,7 +70,7 @@ namespace UnitTests
         public void ReadLumpData()
         {
             BspReader r = new BspReader(MAP_FILENAME);
-            var data = r.ReadLumpData(BspLumps.LUMP_PAKFILE);
+            var data = r.ReadLumpData(BspLumpType.LUMP_PAKFILE);
             r.Dispose();
 
             Assert.IsInstanceOfType(data, typeof(byte[]));
