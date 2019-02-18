@@ -30,6 +30,26 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void DifferentComparison()
+        {
+            var lump1 = new BspLump()
+            {
+                Version = 1,
+                FileLength = 2155,
+                FileOffset = 309
+            };
+
+            var lump2 = new BspLump()
+            {
+                Version = 2,
+                FileLength = 2155,
+                FileOffset = 309
+            };
+
+            Assert.AreNotEqual(lump1, lump2);
+        }
+
+        [TestMethod]
         public void BothNullComparison()
         {
             BspLump one = null;
