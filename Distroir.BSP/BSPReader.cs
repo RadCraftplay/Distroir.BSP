@@ -108,31 +108,29 @@ namespace Distroir.Bsp
         }
 
         /// <summary>
-        /// Reads lump from Binary Reader
+        /// Reads lump info from file
         /// </summary>
-        /// <param name="reader">Binary Reader to read from</param>
-        /// <param name="lumpId">Lump Id</param>
-        /// <returns></returns>
-        public static BspLump ReadLump(BinaryReader reader, BspLumps lumpId)
+        /// <param name="lumpId">Lump type</param>
+        public BspLump ReadLumpInfo(BspLumps lumpType)
         {
-            //Calculate and set offset
-            reader.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
-            //Read lump
-            return ReadLump(reader);
+            return ReadLumpInfo((int)lumpType);
         }
 
         /// <summary>
-        /// Reads lump from Binary Reader
+        /// Reads lump info from file
         /// </summary>
-        /// <param name="reader">Binary Reader to read from</param>
-        /// <param name="lumpId">Lump Id</param>
-        /// <returns></returns>
-        public static BspLump ReadLump(BinaryReader reader, int lumpId)
+        /// <param name="lumpId">Lump id</param>
+        public BspLump ReadLumpInfo(int lumpId)
         {
-            //Calculate and set offset
-            reader.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
-            //Read lump
-            return ReadLump(reader);
+            if (cachedInfo != null)
+            {
+                return cachedInfo.Lumps[lumpId];
+            }
+            else
+            {
+                reader.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
+                return ReadLump();
+            }
         }
 
         /// <summary>
