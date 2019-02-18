@@ -28,5 +28,23 @@ namespace UnitTests
 
             Assert.AreEqual(lump1, lump2);
         }
+
+        [TestMethod]
+        public void BothNullComaprision()
+        {
+            BspLump one = null;
+            BspLump two = null;
+
+            Assert.AreEqual(one, two);
+        }
+
+        [TestMethod]
+        public void OneNullComparision()
+        {
+            BspLump one = new BspLump();
+            BspLump two = null;
+
+            Assert.AreNotEqual(one, two);
+        }
     }
 }
