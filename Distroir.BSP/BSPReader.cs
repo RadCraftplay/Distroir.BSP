@@ -136,15 +136,22 @@ namespace Distroir.Bsp
         /// <summary>
         /// Reads lump data
         /// </summary>
-        /// <param name="reader">Binary Reader to read from</param>
-        /// <param name="lump">Lump informations</param>
-        /// <returns></returns>
-        public static byte[] ReadLumpData(BinaryReader reader, BspLump lump)
+        /// <param name="lump">Lump to read</param>
+        public byte[] ReadLumpData(int lumpId)
         {
-            //Set offset
+            var lump = ReadLumpInfo(lumpId);
+
             reader.BaseStream.Position = lump.FileOffset;
-            //Return value
             return reader.ReadBytes(lump.FileLength);
+        }
+
+        /// <summary>
+        /// Reads lump data
+        /// </summary>
+        /// <param name="lumpType">Lump to read</param>
+        public byte[] ReadLumpData(BspLumps lumpType)
+        {
+            return ReadLumpData((int)lumpType);
         }
     }
 }
