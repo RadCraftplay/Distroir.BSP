@@ -30,7 +30,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void BothNullComaprision()
+        public void BothNullComparison()
         {
             BspLump one = null;
             BspLump two = null;
@@ -39,7 +39,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        public void OneNullComparision()
+        public void OneNullComparison()
         {
             BspLump one = new BspLump();
             BspLump two = null;
