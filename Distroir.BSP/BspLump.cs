@@ -20,6 +20,8 @@ OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 */
+using System.Collections.Generic;
+
 namespace Distroir.Bsp
 {
     public class BspLump
@@ -40,5 +42,37 @@ namespace Distroir.Bsp
         /// Lump ident code
         /// </summary>
         public int fourCC;
+
+        public override bool Equals(object obj)
+        {
+            return obj is BspLump lump &&
+                   FileOffset == lump.FileOffset &&
+                   FileLength == lump.FileLength &&
+                   Version == lump.Version &&
+                   fourCC == lump.fourCC;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -345481539;
+            hashCode = hashCode * -1521134295 + FileOffset.GetHashCode();
+            hashCode = hashCode * -1521134295 + FileLength.GetHashCode();
+            hashCode = hashCode * -1521134295 + Version.GetHashCode();
+            hashCode = hashCode * -1521134295 + fourCC.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(BspLump left, BspLump right)
+        {
+            if (object.ReferenceEquals(null, left))
+                return object.ReferenceEquals(null, right);
+            else
+                return left.Equals(right);
+        }
+
+        public static bool operator !=(BspLump left, BspLump right)
+        {
+            return !(left == right);
+        }
     }
 }
