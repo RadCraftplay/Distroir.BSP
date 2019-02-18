@@ -10,7 +10,7 @@ namespace UnitTests
     public class BspLumpTests
     {
         [TestMethod]
-        public void ComparisonTest()
+        public void ExactComparison()
         {
             var lump1 = new BspLump()
             {
