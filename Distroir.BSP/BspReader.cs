@@ -60,6 +60,8 @@ namespace Distroir.Bsp
         {
             BspInfo info = new BspInfo();
 
+            reader.BaseStream.Position = 0;
+
             //Read identifier
             info.Identifier = reader.ReadInt32();
 
