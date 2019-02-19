@@ -87,5 +87,19 @@ namespace UnitTests
             Assert.IsInstanceOfType(data, typeof(byte[]));
             Assert.IsNotNull(data);
         }
+
+        [TestMethod]
+        public void ReadInCustomOrder()
+        {
+            BspReader reader = new BspReader(MAP_FILENAME);
+            var reference = reader.ReadInfo();
+            reader.Dispose();
+
+            reader = new BspReader(MAP_FILENAME);
+            var meaninglessVar = reader.ReadLumpInfo(BspLumpType.LUMP_PAKFILE);
+            var tested = reader.ReadInfo();
+
+            Assert.AreEqual(reference, tested);
+        }
     }
 }
