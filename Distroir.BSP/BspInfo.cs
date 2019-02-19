@@ -20,6 +20,9 @@ OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 */
+using System.Collections.Generic;
+using System.Linq;
+
 namespace Distroir.Bsp
 {
     public class BspInfo
@@ -40,5 +43,37 @@ namespace Distroir.Bsp
         /// Map's revision number
         /// </summary>
         public int MapRevision;
+
+        public override bool Equals(object obj)
+        {
+            return obj is BspInfo info &&
+                   Identifier == info.Identifier &&
+                   Version == info.Version &&
+                   Enumerable.SequenceEqual(Lumps, info.Lumps) &&
+                   MapRevision == info.MapRevision;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 2049534845;
+            hashCode = hashCode * -1521134295 + Identifier.GetHashCode();
+            hashCode = hashCode * -1521134295 + Version.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<BspLump[]>.Default.GetHashCode(Lumps);
+            hashCode = hashCode * -1521134295 + MapRevision.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(BspInfo left, BspInfo right)
+        {
+            if (object.ReferenceEquals(null, left))
+                return object.ReferenceEquals(null, right);
+            else
+                return left.Equals(right);
+        }
+
+        public static bool operator !=(BspInfo left, BspInfo right)
+        {
+            return !(left == right);
+        }
     }
 }
