@@ -26,6 +26,18 @@ namespace Distroir.Bsp
 {
     public class BspWriter
     {
+        BinaryWriter writer;
+
+        public BspWriter(Stream outputStream)
+        {
+            writer = new BinaryWriter(outputStream);
+        }
+
+        public BspWriter(string filename)
+        {
+            writer = new BinaryWriter(new FileStream(filename, FileMode.Append));
+        }
+
         /// <summary>
         /// Writes BSP File header
         /// </summary>
