@@ -20,11 +20,12 @@ OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 */
+using System;
 using System.IO;
 
 namespace Distroir.Bsp
 {
-    public class BspWriter
+    public class BspWriter : IDisposable
     {
         BinaryWriter writer;
 
@@ -36,6 +37,11 @@ namespace Distroir.Bsp
         public BspWriter(string filename)
         {
             writer = new BinaryWriter(new FileStream(filename, FileMode.Append));
+        }
+
+        public void Dispose()
+        {
+            writer.Dispose();
         }
 
         /// <summary>
