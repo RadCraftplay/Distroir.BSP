@@ -45,37 +45,27 @@ namespace Distroir.Bsp
         }
 
         /// <summary>
-        /// Writes BSP File header
+        /// Writes BspInfo (file header) to file
         /// </summary>
-        /// <param name="w">Binary Writer to write to</param>
-        /// <param name="i">Informations about BSP info</param>
-        public static void WriteHeader(BinaryWriter w, BspInfo i)
+        public void WriteInfo(BspInfo i)
         {
-            //Set offset
-            w.BaseStream.Position = 0;
+            writer.BaseStream.Position = 0;
 
-            //Write header informations
-            w.Write(i.Identifier);
-            w.Write(i.Version);
-            //Write lump informations
+            writer.Write(i.Identifier);
+            writer.Write(i.Version);
+
             foreach (BspLump l in i.Lumps)
-                WriteLump(w, l);
-            //Write map revision number
-            w.Write(i.MapRevision);
+                WriteBspLump(l);
+
+            writer.Write(i.MapRevision);
         }
 
-        /// <summary>
-        /// Writes lump informations
-        /// </summary>
-        /// <param name="w">Binary writer to write to</param>
-        /// <param name="l">Lump informations</param>
-        static void WriteLump(BinaryWriter w, BspLump l)
+        private void WriteBspLump(BspLump l)
         {
-            //Write lump data
-            w.Write(l.FileOffset);
-            w.Write(l.FileLength);
-            w.Write(l.Version);
-            w.Write(l.fourCC);
+            writer.Write(l.FileOffset);
+            writer.Write(l.FileLength);
+            writer.Write(l.Version);
+            writer.Write(l.fourCC);
         }
 
         /// <summary>
