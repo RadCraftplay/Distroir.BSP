@@ -84,7 +84,7 @@ namespace UnitTests
         [TestMethod]
         public void WriteAndValidateBspInfo()
         {
-            WriteInfo();
+            WriteBspInfo();
 
             BspReader reader = new BspReader(TEMP_FILENAME);
             var tempInfo = reader.ReadInfo();
