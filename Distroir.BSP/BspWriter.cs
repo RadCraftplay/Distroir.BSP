@@ -36,7 +36,7 @@ namespace Distroir.Bsp
 
         public BspWriter(string filename)
         {
-            writer = new BinaryWriter(new FileStream(filename, FileMode.Append));
+            writer = new BinaryWriter(new FileStream(filename, FileMode.Open));
         }
 
         public void Dispose()
