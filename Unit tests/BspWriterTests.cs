@@ -26,7 +26,7 @@ namespace UnitTests
             //Prepare variables
             exampleInfo = new BspInfo()
             {
-                Identifier = 0,
+                Identifier = 0x50534256,
                 Version = 0,
                 MapRevision = 0,
                 Lumps = new BspLump[64]
