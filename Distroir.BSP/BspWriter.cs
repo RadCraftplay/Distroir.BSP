@@ -69,29 +69,25 @@ namespace Distroir.Bsp
         }
 
         /// <summary>
-        /// Writes lump informations
+        /// Writes lump info
         /// </summary>
-        /// <param name="writer">Binary writer to write to</param>
-        /// <param name="info">Lump informations</param>
-        /// <param name="lumpId">Id of lump</param>
-        public static void WriteLump(BinaryWriter writer, BspLump info, int lumpId)
+        /// <param name="lumpId">Id of lump to override</param>
+        public void WriteBspLump(BspLump info, int lumpId)
         {
             //Set offset
             writer.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
             //Write lump data
-            WriteLump(writer, info);
+            WriteBspLump(info);
         }
 
         /// <summary>
-        /// Writes lump informations
+        /// Writes lump info
         /// </summary>
-        /// <param name="writer">Binary writer to write to</param>
-        /// <param name="info">Lump informations</param>
-        /// <param name="lumpId">Id of lump</param>
-        public static void WriteLump(BinaryWriter writer, BspLump info, BspLumpType lumpId)
+        /// <param name="lumpId">Id of lump to override</param>
+        public void WriteBspLump(BspLump info, BspLumpType lumpId)
         {
             //Write lump informations
-            WriteLump(writer, info, (int)lumpId);
+            WriteBspLump(info, (int)lumpId);
         }
 
         /// <summary>
