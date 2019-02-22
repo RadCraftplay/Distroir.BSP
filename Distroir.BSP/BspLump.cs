@@ -29,19 +29,19 @@ namespace Distroir.Bsp
         /// <summary>
         /// Offset into file (bytes)
         /// </summary>
-        public int FileOffset;
+        public int FileOffset { get; set; }
         /// <summary>
         /// Length of lump (bytes)
         /// </summary>
-        public int FileLength;
+        public int FileLength { get; set; }
         /// <summary>
         /// Lump format version
         /// </summary>
-        public int Version;
+        public int Version { get; set; }
         /// <summary>
         /// Lump ident code
         /// </summary>
-        public int fourCC;
+        public int fourCC { get; set; }
 
         public override bool Equals(object obj)
         {
