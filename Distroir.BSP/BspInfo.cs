@@ -30,19 +30,19 @@ namespace Distroir.Bsp
         /// <summary>
         /// BSP file identifier
         /// </summary>
-        public int Identifier;
+        public int Identifier { get; set; }
         /// <summary>
         /// BSP file version
         /// </summary>
-        public int Version;
+        public int Version { get; set; }
         /// <summary>
         /// lump directory array
         /// </summary>
-        public BspLump[] Lumps;
+        public BspLump[] Lumps { get; set; }
         /// <summary>
         /// Map's revision number
         /// </summary>
-        public int MapRevision;
+        public int MapRevision { get; set; }
 
         public override bool Equals(object obj)
         {
