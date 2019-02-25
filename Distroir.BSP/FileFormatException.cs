@@ -24,7 +24,7 @@ using System;
 
 namespace Distroir.Bsp
 {
-    internal class FileFormatException : Exception
+    public class FileFormatException : Exception
     {
         public override string Message => "Invalid file format!";
     }
