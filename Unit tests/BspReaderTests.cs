@@ -33,12 +33,21 @@ namespace UnitTests
             r.Dispose();
         }
 
-        
+
         [TestMethod]
         [ExpectedException(typeof(FileFormatException))]
         public void ReadInvalidHeader()
         {
             BspReader r = new BspReader("Unit tests.pdb");
+            r.ReadInfo();
+            r.Dispose();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(IOException))]
+        public void ReadInvalidStream()
+        {
+            BspReader r = new BspReader(new MemoryStream());
             r.ReadInfo();
             r.Dispose();
         }
