@@ -112,25 +112,5 @@ namespace UnitTests
 
             Assert.AreEqual(tempLumpInfo, exampleLump);
         }
-
-        [TestMethod]
-        public void WriteLumpData()
-        {
-            BspInfoWriter writer = new BspInfoWriter(TEMP_FILENAME);
-            writer.WriteLumpData(1, exampleData);
-            writer.Dispose();
-        }
-
-        [TestMethod]
-        public void WriteAndTestLumpData()
-        {
-            WriteLumpData();
-
-            BspReader reader = new BspReader(TEMP_FILENAME);
-            var tempLumpData = reader.ReadLumpData(1);
-            reader.Dispose();
-
-            Assert.AreEqual(tempLumpData, exampleData);
-        }
     }
 }
