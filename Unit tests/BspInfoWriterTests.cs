@@ -5,7 +5,7 @@ using System.IO;
 namespace UnitTests
 {
     [TestClass]
-    public class BspWriterTests
+    public class BspInfoWriterTests
     {
         const string MAP_FILENAME = "testmap.bsp";
         const string TEMP_FILENAME = "map.bsp.temp";
@@ -61,21 +61,21 @@ namespace UnitTests
         [TestMethod]
         public void CtorOverrideStream()
         {
-            BspWriter w = new BspWriter(new MemoryStream());
+            BspInfoWriter w = new BspInfoWriter(new MemoryStream());
             w.Dispose();
         }
 
         [TestMethod]
         public void CtorWriteToFile()
         {
-            BspWriter w = new BspWriter(TEMP_FILENAME);
+            BspInfoWriter w = new BspInfoWriter(TEMP_FILENAME);
             w.Dispose();
         }
 
         [TestMethod]
         public void WriteBspInfo()
         {
-            BspWriter writer = new BspWriter(TEMP_FILENAME);
+            BspInfoWriter writer = new BspInfoWriter(TEMP_FILENAME);
 
             writer.WriteInfo(exampleInfo);
             writer.Dispose();
@@ -96,7 +96,7 @@ namespace UnitTests
         [TestMethod]
         public void WriteLumpInfo()
         {
-            BspWriter writer = new BspWriter(TEMP_FILENAME);
+            BspInfoWriter writer = new BspInfoWriter(TEMP_FILENAME);
             writer.WriteBspLump(exampleLump, 0);
             writer.Dispose();
         }
@@ -116,7 +116,7 @@ namespace UnitTests
         [TestMethod]
         public void WriteLumpData()
         {
-            BspWriter writer = new BspWriter(TEMP_FILENAME);
+            BspInfoWriter writer = new BspInfoWriter(TEMP_FILENAME);
             writer.WriteLumpData(1, exampleData);
             writer.Dispose();
         }

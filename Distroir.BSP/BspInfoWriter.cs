@@ -25,16 +25,16 @@ using System.IO;
 
 namespace Distroir.Bsp
 {
-    public class BspWriter : IDisposable
+    public class BspInfoWriter : IDisposable
     {
         BinaryWriter writer;
 
-        public BspWriter(Stream outputStream)
+        public BspInfoWriter(Stream outputStream)
         {
             writer = new BinaryWriter(outputStream);
         }
 
-        public BspWriter(string filename)
+        public BspInfoWriter(string filename)
         {
             writer = new BinaryWriter(new FileStream(filename, FileMode.Open));
         }
