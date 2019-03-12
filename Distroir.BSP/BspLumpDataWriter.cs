@@ -2,7 +2,7 @@
 using System.IO;
 namespace Distroir.Bsp
 {
-    public class BspLumpDataWriter
+    public class BspLumpDataWriter : IDisposable
     {
         private BinaryWriter dataWriter;
         private BspReader reader;
@@ -16,6 +16,13 @@ namespace Distroir.Bsp
         public BspLumpDataWriter(string filename)
         {
             InitializeWriter(new FileStream(filename, FileMode.Open));
+        }
+
+        public void Dispose()
+        {
+            dataWriter.Dispose();
+            dataWriter.Dispose();
+            gatheredInfo = null;
         }
 
         private void InitializeWriter(Stream stream)
