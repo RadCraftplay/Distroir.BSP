@@ -5,6 +5,7 @@ namespace Distroir.Bsp
     public class BspLumpDataWriter
     {
         private BinaryWriter dataWriter;
+        private BspReader reader;
         private BspInfo gatheredInfo;
 
         public BspLumpDataWriter(Stream stream)
@@ -19,11 +20,9 @@ namespace Distroir.Bsp
 
         private void InitializeWriter(Stream stream)
         {
-            using (BspReader reader = new BspReader(stream))
-            {
-                gatheredInfo = reader.ReadInfo();
-            }
-
+            reader = new BspReader(stream);
+            gatheredInfo = reader.ReadInfo();
+            
             dataWriter = new BinaryWriter(stream);
         }
         
