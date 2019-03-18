@@ -30,6 +30,11 @@ namespace Distroir.Bsp
         private BinaryReader reader;
         private BspInfo cachedInfo;
 
+        public BspReader(BinaryReader reader)
+        {
+            this.reader = reader;
+        }
+
         public BspReader(Stream input)
         {
             reader = new BinaryReader(input);

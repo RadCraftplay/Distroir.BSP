@@ -13,6 +13,18 @@ namespace UnitTests
         const string MAP_FILENAME = "testmap.bsp";
 
         [TestMethod]
+        public void CtorReadFromBinaryReader()
+        {
+            using (var stream = new FileStream(MAP_FILENAME, FileMode.Open))
+            {
+                using (var reader = new BinaryReader(stream))
+                {
+                    BspReader r = new BspReader(reader);
+                }
+            }
+        }
+
+        [TestMethod]
         public void CtorReadFile()
         {
             BspReader r = new BspReader(MAP_FILENAME);
