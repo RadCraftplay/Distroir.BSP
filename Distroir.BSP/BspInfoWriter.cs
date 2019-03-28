@@ -29,6 +29,11 @@ namespace Distroir.Bsp
     {
         BinaryWriter writer;
 
+        public BspInfoWriter(BinaryWriter writer)
+        {
+            this.writer = writer;
+        }
+
         public BspInfoWriter(Stream outputStream)
         {
             writer = new BinaryWriter(outputStream);
