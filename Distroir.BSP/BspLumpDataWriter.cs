@@ -1,135 +1,90 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 namespace Distroir.Bsp
 {
     public class BspLumpDataWriter : IDisposable
     {
         private BinaryWriter dataWriter;
+        private BspInfoWriter infoWriter;
         private BspReader reader;
         private BspInfo gatheredInfo;
 
-        public BspLumpDataWriter(Stream stream)
+        public BspLumpDataWriter(Stream input, Stream output)
         {
-            InitializeWriter(stream);
+            InitializeWriter(input, output);
         }
 
-        public BspLumpDataWriter(string filename)
+        public BspLumpDataWriter(string inputFilename, string outputFilename)
         {
-            InitializeWriter(new FileStream(filename, FileMode.Open));
+            InitializeWriter(new FileStream(inputFilename, FileMode.Open),
+                new FileStream(outputFilename, FileMode.CreateNew));
         }
 
         public void Dispose()
         {
             dataWriter.Dispose();
-            dataWriter.Dispose();
+            infoWriter.Dispose();
+            reader.Dispose();
             gatheredInfo = null;
         }
 
-        private void InitializeWriter(Stream stream)
+        private void InitializeWriter(Stream input, Stream output)
         {
-            reader = new BspReader(stream);
+            dataWriter = new BinaryWriter(output);
+            infoWriter = new BspInfoWriter(dataWriter);
+            reader = new BspReader(input);
             gatheredInfo = reader.ReadInfo();
-            
-            dataWriter = new BinaryWriter(stream);
         }
-        
-        /*
 
-        /// <summary>
-        /// Writes lump data to FileStream
-        /// </summary>
-        /// <param name="input">Input stream (File)</param>
-        /// <param name="data">New lump data</param>
-        /// <param name="lumpId">Id of lump to overwrite</param>
-        /// <param name="output">Destination stream</param>
-        public static void WriteLumpData(Stream input, byte[] data, int lumpId, Stream output)
+        public void WriteLumpData(int lumpId, byte[] data)
         {
-            //Difference in length of data
-            int difference = 0;
+            var newBspInfo = gatheredInfo;
+            var lumpToUpdate = newBspInfo.Lumps[lumpId];
+            var sizeDifference = data.Length - lumpToUpdate.FileLength;
 
-            //Save stream length
-            long streamLength = input.Length;
+            newBspInfo.Lumps = UpdateLumpSizes(newBspInfo.Lumps, lumpToUpdate, sizeDifference);
 
-            //Data before lump
-            byte[] beforeLump;
-            //Data after lump
-            byte[] afterLump;
+            infoWriter.WriteInfo(newBspInfo);
+            WriteDataToFile(newBspInfo.Lumps, gatheredInfo.Lumps, lumpId, data);
+        }
 
-            //BSP informations
-            BspInfo info;
-            //Collection of all lumps
-            BspLump[] lumps = new BspLump[64];
+        private BspLump[] UpdateLumpSizes(BspLump[] lumps, BspLump lumpToUpdate, int sizeDifference)
+        {
+            var updatedLumps = new BspLump[64];
 
-            //Old lump data
-            BspLump old = new BspLump();
-
-            //Read lump data
-            using (BinaryReader r = new BinaryReader(input))
-            {
-                //Read BSP informations
-                info = BspReader.ReadInfo(r);
-                lumps = info.Lumps;
-
-                //Get old lump
-                old = lumps[lumpId];
-                //Calculate difference
-                difference = data.Length - old.FileLength;
-
-                //Read data before changed lump
-                beforeLump = ReadBytes(r, 1036, old.FileOffset - 1036);
-
-                //Read data after lump
-                input.Seek(old.FileOffset + old.FileLength, SeekOrigin.Begin);
-                input.Seek(streamLength, SeekOrigin.End);
-                afterLump = ReadBytes(r, old.FileOffset + old.FileLength, ((int)streamLength - (old.FileOffset + old.FileLength)));
-
-                //Overwrite lump length
-                old.FileLength = data.Length;
-
-                //Save old lump informations
-                lumps[lumpId] = old;
-            }
-
-            //Update lump informations
             for (int i = 0; i < 64; i++)
             {
-                //Check if lump have bigger offset
-                if (lumps[i].FileOffset > old.FileOffset)
-                {
-                    //If yes, change offset of lump
-                    lumps[i].FileOffset += difference;
-                }
+                var tempLump = lumps[i];
+
+                if (lumps[i].FileOffset == lumpToUpdate.FileOffset)
+                    tempLump.FileLength += sizeDifference;
+
+                if (lumps[i].FileOffset > lumpToUpdate.FileOffset)
+                    tempLump.FileOffset += sizeDifference;
+
+                updatedLumps[i] = tempLump;
             }
 
-            // Apply lump changes to BSP info
-            info.Lumps = lumps;
-
-            //Write file
-            using (BinaryWriter w = new BinaryWriter(output))
-            {
-                //Write file header
-                WriteHeader(w, info);
-                //Write data before modified lump
-                w.Write(beforeLump);
-                //Write modified data
-                w.Write(data);
-                //Write data after modified lump
-                w.Write(afterLump);
-            }
+            return updatedLumps;
         }
 
-        /// <summary>
-        /// Reads byte array from binary reader
-        /// </summary>
-        /// <param name="r">Binary reader to read from</param>
-        /// <param name="offset">Offset of</param>
-        /// <param name="length"></param>
-        /// <returns></returns>
-        static byte[] ReadBytes(BinaryReader r, int offset, int length)
+        private void WriteDataToFile(BspLump[] oldLumps, BspLump[] newLumps, int modifiedLumpId, byte[] modifiedLumpData)
         {
-            r.BaseStream.Position = offset;
-            return r.ReadBytes(length);
+            for (int i = 0; i < 64; i++)
+            {
+                BspLump oldLump = oldLumps[i];
+                BspLump newLump = newLumps[i];
+                byte[] dataToWrite;
+
+                if (i == modifiedLumpId)
+                    dataToWrite = modifiedLumpData;
+                else
+                    dataToWrite = reader.ReadLumpData(i);
+
+                dataWriter.BaseStream.Position = newLump.FileOffset;
+                dataWriter.Write(dataToWrite);
+            }
         }
-        */
     }
 }
