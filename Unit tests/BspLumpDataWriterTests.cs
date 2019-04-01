@@ -50,14 +50,46 @@ namespace UnitTests
         [TestMethod]
         public void WriteData()
         {
+            var lumpToEdit = 39;
+
             using (var writer = new BspLumpDataWriter(TEMP_FILENAME, OUTPUT_FILENAME))
             {
-                writer.WriteLumpData(40, exampleData);
+                writer.WriteLumpData(lumpToEdit, exampleData);
             }
 
             using (var reader = new BspReader(OUTPUT_FILENAME))
             {
-                Assert.AreEqual(exampleData.Length, reader.ReadLumpData(40).Length);
+                Assert.AreEqual(exampleData.Length, reader.ReadLumpData(lumpToEdit).Length);
+            }
+        }
+
+        [TestMethod]
+        public void WriteAndValidateOtherData()
+        {
+            var lumpToEdit = 39;
+            byte[] oldData;
+
+            using (var reader = new BspReader(TEMP_FILENAME))
+            {
+                oldData = reader.ReadLumpData(40);
+            }
+
+            using (var writer = new BspLumpDataWriter(TEMP_FILENAME, OUTPUT_FILENAME))
+            {
+                writer.WriteLumpData(lumpToEdit, exampleData);
+            }
+
+            using (var reader = new BspReader(OUTPUT_FILENAME))
+            {
+                var newData = reader.ReadLumpData(40);
+
+                for (int i = 0; i < newData.Length; i++)
+                {
+                    byte oldByte = oldData[i];
+                    byte newByte = newData[i];
+
+                    Assert.AreEqual(oldByte, newByte);
+                }
             }
         }
     }
