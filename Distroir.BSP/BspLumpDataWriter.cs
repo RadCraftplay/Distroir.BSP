@@ -43,13 +43,13 @@ namespace Distroir.Bsp
             var lumpToUpdate = newBspInfo.Lumps[lumpId];
             var sizeDifference = data.Length - lumpToUpdate.FileLength;
 
-            newBspInfo.Lumps = UpdateLumpSizes(newBspInfo.Lumps, lumpToUpdate, sizeDifference);
+            newBspInfo.Lumps = UpdateLumpInfo(newBspInfo.Lumps, lumpToUpdate, sizeDifference);
 
             infoWriter.WriteInfo(newBspInfo);
             WriteDataToFile(newBspInfo.Lumps, gatheredInfo.Lumps, lumpId, data);
         }
 
-        private BspLump[] UpdateLumpSizes(BspLump[] lumps, BspLump lumpToUpdate, int sizeDifference)
+        private BspLump[] UpdateLumpInfo(BspLump[] lumps, BspLump lumpToUpdate, int sizeDifference)
         {
             var updatedLumps = new BspLump[64];
 
