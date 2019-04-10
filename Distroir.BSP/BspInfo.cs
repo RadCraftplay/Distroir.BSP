@@ -76,7 +76,7 @@ namespace Distroir.Bsp
             return !(left == right);
         }
 
-        public BspInfo Clone()
+        internal BspInfo Clone()
         {
             var clonedInfo = new BspInfo
             {
