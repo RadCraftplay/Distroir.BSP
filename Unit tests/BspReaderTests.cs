@@ -50,7 +50,7 @@ namespace UnitTests
         [ExpectedException(typeof(FileFormatException))]
         public void ReadInvalidHeader()
         {
-            BspReader r = new BspReader("Unit tests.pdb");
+            BspReader r = new BspReader("notabspfile.txt");
             r.ReadInfo();
             r.Dispose();
         }
