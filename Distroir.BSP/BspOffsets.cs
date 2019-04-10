@@ -22,7 +22,7 @@ IN THE SOFTWARE.
 */
 namespace Distroir.Bsp
 {
-    public class BspOffsets
+    internal class BspOffsets
     {
         /// <summary>
         /// Calculates offset of lump
