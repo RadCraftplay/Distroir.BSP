@@ -75,5 +75,30 @@ namespace Distroir.Bsp
         {
             return !(left == right);
         }
+
+        public BspInfo Clone()
+        {
+            var clonedInfo = new BspInfo
+            {
+                Identifier = Identifier,
+                Version = Version,
+                Lumps = new BspLump[64],
+                MapRevision = MapRevision
+            };
+
+            for (int i = 0; i < 64; i++)
+            {
+                var oldLump = Lumps[i];
+                clonedInfo.Lumps[i] = new BspLump()
+                {
+                    FileLength = oldLump.FileLength,
+                    FileOffset = oldLump.FileOffset,
+                    fourCC = oldLump.fourCC,
+                    Version = oldLump.Version
+                };
+            }
+
+            return clonedInfo;
+        }
     }
 }

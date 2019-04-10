@@ -39,14 +39,14 @@ namespace Distroir.Bsp
 
         public void WriteLumpData(int lumpId, byte[] data)
         {
-            var newBspInfo = gatheredInfo;
+            var newBspInfo = gatheredInfo.Clone();
             var lumpToUpdate = newBspInfo.Lumps[lumpId];
             var sizeDifference = data.Length - lumpToUpdate.FileLength;
 
             newBspInfo.Lumps = UpdateLumpInfo(newBspInfo.Lumps, lumpToUpdate, sizeDifference);
 
             infoWriter.WriteInfo(newBspInfo);
-            WriteDataToFile(newBspInfo.Lumps, gatheredInfo.Lumps, lumpId, data);
+            WriteDataToFile(gatheredInfo.Lumps, newBspInfo.Lumps, lumpId, data);
         }
 
         private BspLump[] UpdateLumpInfo(BspLump[] lumps, BspLump lumpToUpdate, int sizeDifference)
