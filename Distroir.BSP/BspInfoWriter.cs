@@ -77,7 +77,7 @@ namespace Distroir.Bsp
         /// Writes lump info
         /// </summary>
         /// <param name="lumpId">Id of lump to override</param>
-        public void WriteBspLump(BspLumpInfo info, int lumpId)
+        public void WriteBspLumpInfo(BspLumpInfo info, int lumpId)
         {
             //Set offset
             writer.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
@@ -89,10 +89,10 @@ namespace Distroir.Bsp
         /// Writes lump info
         /// </summary>
         /// <param name="lumpId">Id of lump to override</param>
-        public void WriteBspLump(BspLumpInfo info, BspLumpType lumpId)
+        public void WriteBspLumpInfo(BspLumpInfo info, BspLumpType lumpId)
         {
             //Write lump informations
-            WriteBspLump(info, (int)lumpId);
+            WriteBspLumpInfo(info, (int)lumpId);
         }
     }
 }

@@ -97,7 +97,7 @@ namespace UnitTests
         public void WriteLumpInfo()
         {
             BspInfoWriter writer = new BspInfoWriter(TEMP_FILENAME);
-            writer.WriteBspLump(exampleLump, 0);
+            writer.WriteBspLumpInfo(exampleLump, 0);
             writer.Dispose();
         }
 
