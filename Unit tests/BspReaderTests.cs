@@ -65,7 +65,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(EndOfStreamException))]
+        [ExpectedException(typeof(FileFormatException))]
         public void ReadInvalidStream()
         {
             BspReader r = new BspReader(new MemoryStream());
