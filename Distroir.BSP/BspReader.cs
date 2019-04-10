@@ -65,6 +65,9 @@ namespace Distroir.Bsp
         {
             BspInfo info = new BspInfo();
 
+            if (reader.BaseStream.Length < 1036)
+                throw new FileFormatException();
+
             reader.BaseStream.Position = 0;
 
             //Read identifier

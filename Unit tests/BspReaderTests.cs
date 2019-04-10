@@ -56,6 +56,15 @@ namespace UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(FileFormatException))]
+        public void ReadEmptyFile()
+        {
+            BspReader r = new BspReader("emptyfile.bsp");
+            r.ReadInfo();
+            r.Dispose();
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(EndOfStreamException))]
         public void ReadInvalidStream()
         {
