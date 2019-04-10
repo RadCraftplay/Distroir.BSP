@@ -91,7 +91,7 @@ namespace UnitTests
             var lump = r.ReadLumpInfo(BspLumpType.LUMP_PAKFILE);
             r.Dispose();
 
-            Assert.IsInstanceOfType(lump, typeof(BspLump));
+            Assert.IsInstanceOfType(lump, typeof(BspLumpInfo));
             Assert.IsNotNull(lump);
         }
 
@@ -102,7 +102,7 @@ namespace UnitTests
             var lump = r.ReadLumpInfo(40);
             r.Dispose();
 
-            Assert.IsInstanceOfType(lump, typeof(BspLump));
+            Assert.IsInstanceOfType(lump, typeof(BspLumpInfo));
             Assert.IsNotNull(lump);
         }
 

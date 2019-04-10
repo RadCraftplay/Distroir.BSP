@@ -84,7 +84,7 @@ namespace Distroir.Bsp
             info.Version = reader.ReadInt32();
 
             //Read game lumps
-            info.Lumps = new BspLump[64];
+            info.Lumps = new BspLumpInfo[64];
 
             for (int i = 0; i < 64; i++)
             {
@@ -102,10 +102,10 @@ namespace Distroir.Bsp
         /// </summary>
         /// <param name="r">Binary Reader to read from</param>
         /// <returns></returns>
-        private BspLump ReadLump()
+        private BspLumpInfo ReadLump()
         {
             //Create new lump
-            BspLump lump = new BspLump();
+            BspLumpInfo lump = new BspLumpInfo();
 
             //Read  lump data
             lump.FileOffset = reader.ReadInt32();
@@ -121,7 +121,7 @@ namespace Distroir.Bsp
         /// Reads lump info from file
         /// </summary>
         /// <param name="lumpId">Lump type</param>
-        public BspLump ReadLumpInfo(BspLumpType lumpType)
+        public BspLumpInfo ReadLumpInfo(BspLumpType lumpType)
         {
             return ReadLumpInfo((int)lumpType);
         }
@@ -130,7 +130,7 @@ namespace Distroir.Bsp
         /// Reads lump info from file
         /// </summary>
         /// <param name="lumpId">Lump id</param>
-        public BspLump ReadLumpInfo(int lumpId)
+        public BspLumpInfo ReadLumpInfo(int lumpId)
         {
             if (cachedInfo != null)
             {

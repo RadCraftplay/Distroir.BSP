@@ -12,14 +12,14 @@ namespace UnitTests
         [TestMethod]
         public void ExactComparison()
         {
-            var lump1 = new BspLump()
+            var lump1 = new BspLumpInfo()
             {
                 Version = 1,
                 FileLength = 2155,
                 FileOffset = 309
             };
 
-            var lump2 = new BspLump()
+            var lump2 = new BspLumpInfo()
             {
                 Version = 1,
                 FileLength = 2155,
@@ -32,14 +32,14 @@ namespace UnitTests
         [TestMethod]
         public void DifferentComparison()
         {
-            var lump1 = new BspLump()
+            var lump1 = new BspLumpInfo()
             {
                 Version = 1,
                 FileLength = 2155,
                 FileOffset = 309
             };
 
-            var lump2 = new BspLump()
+            var lump2 = new BspLumpInfo()
             {
                 Version = 2,
                 FileLength = 2155,
@@ -52,8 +52,8 @@ namespace UnitTests
         [TestMethod]
         public void BothNullComparison()
         {
-            BspLump one = null;
-            BspLump two = null;
+            BspLumpInfo one = null;
+            BspLumpInfo two = null;
 
             Assert.AreEqual(one, two);
         }
@@ -61,8 +61,8 @@ namespace UnitTests
         [TestMethod]
         public void OneNullComparison()
         {
-            BspLump one = new BspLump();
-            BspLump two = null;
+            BspLumpInfo one = new BspLumpInfo();
+            BspLumpInfo two = null;
 
             Assert.AreNotEqual(one, two);
         }

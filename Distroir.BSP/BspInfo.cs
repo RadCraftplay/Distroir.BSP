@@ -38,7 +38,7 @@ namespace Distroir.Bsp
         /// <summary>
         /// lump directory array
         /// </summary>
-        public BspLump[] Lumps { get; set; }
+        public BspLumpInfo[] Lumps { get; set; }
         /// <summary>
         /// Map's revision number
         /// </summary>
@@ -58,7 +58,7 @@ namespace Distroir.Bsp
             var hashCode = 2049534845;
             hashCode = hashCode * -1521134295 + Identifier.GetHashCode();
             hashCode = hashCode * -1521134295 + Version.GetHashCode();
-            hashCode = hashCode * -1521134295 + EqualityComparer<BspLump[]>.Default.GetHashCode(Lumps);
+            hashCode = hashCode * -1521134295 + EqualityComparer<BspLumpInfo[]>.Default.GetHashCode(Lumps);
             hashCode = hashCode * -1521134295 + MapRevision.GetHashCode();
             return hashCode;
         }
@@ -82,14 +82,14 @@ namespace Distroir.Bsp
             {
                 Identifier = Identifier,
                 Version = Version,
-                Lumps = new BspLump[64],
+                Lumps = new BspLumpInfo[64],
                 MapRevision = MapRevision
             };
 
             for (int i = 0; i < 64; i++)
             {
                 var oldLump = Lumps[i];
-                clonedInfo.Lumps[i] = new BspLump()
+                clonedInfo.Lumps[i] = new BspLumpInfo()
                 {
                     FileLength = oldLump.FileLength,
                     FileOffset = oldLump.FileOffset,

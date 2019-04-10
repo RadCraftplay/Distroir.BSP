@@ -24,7 +24,7 @@ using System.Collections.Generic;
 
 namespace Distroir.Bsp
 {
-    public class BspLump
+    public class BspLumpInfo
     {
         /// <summary>
         /// Offset into file (bytes)
@@ -45,7 +45,7 @@ namespace Distroir.Bsp
 
         public override bool Equals(object obj)
         {
-            return obj is BspLump lump &&
+            return obj is BspLumpInfo lump &&
                    FileOffset == lump.FileOffset &&
                    FileLength == lump.FileLength &&
                    Version == lump.Version &&
@@ -62,7 +62,7 @@ namespace Distroir.Bsp
             return hashCode;
         }
 
-        public static bool operator ==(BspLump left, BspLump right)
+        public static bool operator ==(BspLumpInfo left, BspLumpInfo right)
         {
             if (object.ReferenceEquals(null, left))
                 return object.ReferenceEquals(null, right);
@@ -70,7 +70,7 @@ namespace Distroir.Bsp
                 return left.Equals(right);
         }
 
-        public static bool operator !=(BspLump left, BspLump right)
+        public static bool operator !=(BspLumpInfo left, BspLumpInfo right)
         {
             return !(left == right);
         }

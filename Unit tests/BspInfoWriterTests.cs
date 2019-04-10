@@ -11,7 +11,7 @@ namespace UnitTests
         const string TEMP_FILENAME = "map.bsp.temp";
 
         private BspInfo exampleInfo;
-        private BspLump exampleLump;
+        private BspLumpInfo exampleLump;
         private byte[] exampleData = new byte[4] { 16, 32, 64, 128 };
 
         [TestInitialize]
@@ -29,12 +29,12 @@ namespace UnitTests
                 Identifier = 0x50534256,
                 Version = 0,
                 MapRevision = 0,
-                Lumps = new BspLump[64]
+                Lumps = new BspLumpInfo[64]
             };
 
             for (int i = 0; i < 64; i++)
             {
-                exampleInfo.Lumps[i] = new BspLump()
+                exampleInfo.Lumps[i] = new BspLumpInfo()
                 {
                     FileLength = i,
                     FileOffset = i,
@@ -43,7 +43,7 @@ namespace UnitTests
                 };
             }
 
-            exampleLump = new BspLump()
+            exampleLump = new BspLumpInfo()
             {
                 FileLength = 1,
                 FileOffset = 2,

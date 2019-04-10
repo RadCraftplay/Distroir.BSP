@@ -31,9 +31,9 @@ namespace UnitTests
             BspInfo info = new BspInfo();
             info.Version = 1;
             info.Identifier = 1;
-            info.Lumps = new BspLump[1]
+            info.Lumps = new BspLumpInfo[1]
             {
-                new BspLump()
+                new BspLumpInfo()
                 {
                     Version = 1,
                     FileLength = 1,
@@ -46,9 +46,9 @@ namespace UnitTests
             BspInfo info2 = new BspInfo();
             info2.Version = 1;
             info2.Identifier = 1;
-            info2.Lumps = new BspLump[1]
+            info2.Lumps = new BspLumpInfo[1]
             {
-                new BspLump()
+                new BspLumpInfo()
                 {
                     Version = 1,
                     FileLength = 1,

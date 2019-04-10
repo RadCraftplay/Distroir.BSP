@@ -49,9 +49,9 @@ namespace Distroir.Bsp
             WriteDataToFile(gatheredInfo.Lumps, newBspInfo.Lumps, lumpId, data);
         }
 
-        private BspLump[] UpdateLumpInfo(BspLump[] lumps, BspLump lumpToUpdate, int sizeDifference)
+        private BspLumpInfo[] UpdateLumpInfo(BspLumpInfo[] lumps, BspLumpInfo lumpToUpdate, int sizeDifference)
         {
-            var updatedLumps = new BspLump[64];
+            var updatedLumps = new BspLumpInfo[64];
 
             for (int i = 0; i < 64; i++)
             {
@@ -69,12 +69,12 @@ namespace Distroir.Bsp
             return updatedLumps;
         }
 
-        private void WriteDataToFile(BspLump[] oldLumps, BspLump[] newLumps, int modifiedLumpId, byte[] modifiedLumpData)
+        private void WriteDataToFile(BspLumpInfo[] oldLumps, BspLumpInfo[] newLumps, int modifiedLumpId, byte[] modifiedLumpData)
         {
             for (int i = 0; i < 64; i++)
             {
-                BspLump oldLump = oldLumps[i];
-                BspLump newLump = newLumps[i];
+                BspLumpInfo oldLump = oldLumps[i];
+                BspLumpInfo newLump = newLumps[i];
                 byte[] dataToWrite;
 
                 if (i == modifiedLumpId)

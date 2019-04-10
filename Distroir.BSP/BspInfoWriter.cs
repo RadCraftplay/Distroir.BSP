@@ -59,37 +59,37 @@ namespace Distroir.Bsp
             writer.Write(i.Identifier);
             writer.Write(i.Version);
 
-            foreach (BspLump l in i.Lumps)
-                WriteBspLump(l);
+            foreach (BspLumpInfo l in i.Lumps)
+                WriteBspLumpInfo(l);
 
             writer.Write(i.MapRevision);
         }
 
-        private void WriteBspLump(BspLump l)
+        private void WriteBspLumpInfo(BspLumpInfo info)
         {
-            writer.Write(l.FileOffset);
-            writer.Write(l.FileLength);
-            writer.Write(l.Version);
-            writer.Write(l.fourCC);
+            writer.Write(info.FileOffset);
+            writer.Write(info.FileLength);
+            writer.Write(info.Version);
+            writer.Write(info.fourCC);
         }
 
         /// <summary>
         /// Writes lump info
         /// </summary>
         /// <param name="lumpId">Id of lump to override</param>
-        public void WriteBspLump(BspLump info, int lumpId)
+        public void WriteBspLump(BspLumpInfo info, int lumpId)
         {
             //Set offset
             writer.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
             //Write lump data
-            WriteBspLump(info);
+            WriteBspLumpInfo(info);
         }
 
         /// <summary>
         /// Writes lump info
         /// </summary>
         /// <param name="lumpId">Id of lump to override</param>
-        public void WriteBspLump(BspLump info, BspLumpType lumpId)
+        public void WriteBspLump(BspLumpInfo info, BspLumpType lumpId)
         {
             //Write lump informations
             WriteBspLump(info, (int)lumpId);
