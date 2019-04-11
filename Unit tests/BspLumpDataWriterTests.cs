@@ -8,9 +8,9 @@ namespace UnitTests
     [TestClass]
     public class BspLumpDataWriterTests
     {
-        const string MAP_FILENAME = "testmap.bsp";
-        const string TEMP_FILENAME = "map.bsp.temp";
-        const string OUTPUT_FILENAME = "map_modified.bsp.temp";
+        const string MAP_FILENAME = "Test resources/testmap.bsp";
+        const string TEMP_FILENAME = "Test resources/map.bsp.temp";
+        const string OUTPUT_FILENAME = "Test resources/map_modified.bsp.temp";
         private readonly byte[] exampleData = { 16, 32, 64, 128 };
         private string exceptionMessage;
         private string ExceptionMessage => exceptionMessage;

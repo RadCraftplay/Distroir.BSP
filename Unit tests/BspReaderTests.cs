@@ -10,7 +10,7 @@ namespace UnitTests
     [TestClass]
     public class BspReaderTests
     {
-        const string MAP_FILENAME = "testmap.bsp";
+        const string MAP_FILENAME = "Test resources/testmap.bsp";
         private string exceptionMessage;
         private string ExceptionMessage => exceptionMessage;
 
@@ -65,7 +65,7 @@ namespace UnitTests
         [ExpectedException(typeof(FileFormatException))]
         public void ReadInvalidHeader()
         {
-            BspReader r = new BspReader("notabspfile.txt");
+            BspReader r = new BspReader("Test resources/notabspfile.txt");
             r.ReadInfo();
             r.Dispose();
         }
@@ -74,7 +74,7 @@ namespace UnitTests
         [ExpectedException(typeof(FileFormatException))]
         public void ReadEmptyFile()
         {
-            BspReader r = new BspReader("emptyfile.bsp");
+            BspReader r = new BspReader("Test resources/emptyfile.bsp");
             r.ReadInfo();
             r.Dispose();
         }

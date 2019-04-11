@@ -9,7 +9,7 @@ namespace UnitTests
     [TestClass]
     public class BspInfoTests
     {
-        const string MAP_FILENAME = "testmap.bsp";
+        const string MAP_FILENAME = "Test resources/testmap.bsp";
 
         [TestMethod]
         public void ComparisonTest()

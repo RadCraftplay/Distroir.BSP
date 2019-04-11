@@ -8,8 +8,8 @@ namespace UnitTests
     [TestClass]
     public class BspInfoWriterTests
     {
-        const string MAP_FILENAME = "testmap.bsp";
-        const string TEMP_FILENAME = "map.bsp.temp";
+        const string MAP_FILENAME = "Test resources/testmap.bsp";
+        const string TEMP_FILENAME = "Test resources/map.bsp.temp";
 
         private BspInfo exampleInfo;
         private BspLumpInfo exampleLump;
