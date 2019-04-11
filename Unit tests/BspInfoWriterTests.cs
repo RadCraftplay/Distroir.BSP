@@ -56,7 +56,7 @@ namespace UnitTests
 
             try
             {
-                throw new ObjectDisposedException(nameof(BspReader));
+                throw new ObjectDisposedException(nameof(BspInfoWriter));
             }
             catch (Exception ex)
             {
