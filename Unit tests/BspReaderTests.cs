@@ -12,6 +12,7 @@ namespace UnitTests
     {
         const string MAP_FILENAME = "Test resources/testmap.bsp";
         const string NOT_BSP_FILE_FILENAME = "Test resources/notabspfile.txt";
+        const string EMPTY_FILE_FILENAME = "Test resources/emptyfile.bsp";
         private string exceptionMessage;
         private string ExceptionMessage => exceptionMessage;
 
@@ -75,7 +76,7 @@ namespace UnitTests
         [ExpectedException(typeof(FileFormatException))]
         public void ReadEmptyFile()
         {
-            BspReader r = new BspReader("Test resources/emptyfile.bsp");
+            BspReader r = new BspReader(EMPTY_FILE_FILENAME);
             r.ReadInfo();
             r.Dispose();
         }
