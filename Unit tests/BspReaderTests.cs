@@ -138,8 +138,36 @@ namespace UnitTests
             reader = new BspReader(MAP_FILENAME);
             var meaninglessVar = reader.ReadLumpInfo(BspLumpType.LUMP_PAKFILE);
             var tested = reader.ReadInfo();
+            reader.Dispose();
 
             Assert.AreEqual(reference, tested);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void ReadInfoDisposed()
+        {
+            var reader = new BspReader(MAP_FILENAME);
+            reader.Dispose();
+            reader.ReadInfo();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void ReadLumpInfoDisposed()
+        {
+            var reader = new BspReader(MAP_FILENAME);
+            reader.Dispose();
+            reader.ReadLumpInfo(0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
+        public void ReadLumpDataDisposed()
+        {
+            var reader = new BspReader(MAP_FILENAME);
+            reader.Dispose();
+            reader.ReadLumpData(0);
         }
     }
 }

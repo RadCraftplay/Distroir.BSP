@@ -92,5 +92,14 @@ namespace UnitTests
                 }
             }
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.ObjectDisposedException))]
+        public void WriteDataDisposed()
+        {
+            var writer = new BspLumpDataWriter(TEMP_FILENAME, OUTPUT_FILENAME);
+            writer.Dispose();
+            writer.WriteLumpData(0, new byte[1] { 1 });
+        }
     }
 }

@@ -112,5 +112,25 @@ namespace UnitTests
 
             Assert.AreEqual(tempLumpInfo, exampleLump);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.ObjectDisposedException))]
+        public void WriteInfoDisposed()
+        {
+            var infoWriter = new BspInfoWriter(TEMP_FILENAME);
+            infoWriter.Dispose();
+
+            infoWriter.WriteInfo(new BspInfo());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(System.ObjectDisposedException))]
+        public void WriteBspLumpInfoDisposed()
+        {
+            var infoWriter = new BspInfoWriter(TEMP_FILENAME);
+            infoWriter.Dispose();
+
+            infoWriter.WriteBspLumpInfo(new BspLumpInfo(), 0);
+        }
     }
 }
