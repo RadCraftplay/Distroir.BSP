@@ -9,6 +9,7 @@ namespace Distroir.Bsp
         private BspInfoWriter infoWriter;
         private BspReader reader;
         private BspInfo gatheredInfo;
+        private bool disposed = false;
 
         public BspLumpDataWriter(Stream input, Stream output)
         {
@@ -27,6 +28,7 @@ namespace Distroir.Bsp
             infoWriter.Dispose();
             reader.Dispose();
             gatheredInfo = null;
+            disposed = true;
         }
 
         private void InitializeWriter(Stream input, Stream output)
@@ -39,6 +41,9 @@ namespace Distroir.Bsp
 
         public void WriteLumpData(int lumpId, byte[] data)
         {
+            if (disposed)
+                throw new ObjectDisposedException(nameof(BspLumpDataWriter));
+
             var newBspInfo = gatheredInfo.Clone();
             var lumpToUpdate = newBspInfo.Lumps[lumpId];
             var sizeDifference = data.Length - lumpToUpdate.FileLength;
