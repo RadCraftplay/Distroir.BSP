@@ -29,6 +29,7 @@ namespace Distroir.Bsp
     {
         private BinaryReader reader;
         private BspInfo cachedInfo;
+        private bool disposed = false;
 
         public BspReader(BinaryReader reader)
         {
@@ -48,6 +49,7 @@ namespace Distroir.Bsp
         public void Dispose()
         {
             reader.Dispose();
+            disposed = true;
         }
 
         /// <summary>
@@ -55,6 +57,8 @@ namespace Distroir.Bsp
         /// </summary>
         public BspInfo ReadInfo()
         {
+            ThrowExceptionIfDisposed();
+
             if (cachedInfo == null)
                 cachedInfo = RefreshInfo();
 
@@ -132,6 +136,8 @@ namespace Distroir.Bsp
         /// <param name="lumpId">Lump id</param>
         public BspLumpInfo ReadLumpInfo(int lumpId)
         {
+            ThrowExceptionIfDisposed();
+
             if (cachedInfo != null)
             {
                 return cachedInfo.Lumps[lumpId];
@@ -149,6 +155,8 @@ namespace Distroir.Bsp
         /// <param name="lump">Lump to read</param>
         public byte[] ReadLumpData(int lumpId)
         {
+            ThrowExceptionIfDisposed();
+
             var lump = ReadLumpInfo(lumpId);
 
             reader.BaseStream.Position = lump.FileOffset;
@@ -162,6 +170,12 @@ namespace Distroir.Bsp
         public byte[] ReadLumpData(BspLumpType lumpType)
         {
             return ReadLumpData((int)lumpType);
+        }
+
+        private void ThrowExceptionIfDisposed()
+        {
+            if (disposed)
+                throw new ObjectDisposedException(nameof(BspReader));
         }
     }
 }
