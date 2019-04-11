@@ -28,6 +28,7 @@ namespace Distroir.Bsp
     public class BspInfoWriter : IDisposable
     {
         BinaryWriter writer;
+        private bool disposed = false;
 
         public BspInfoWriter(BinaryWriter writer)
         {
@@ -47,6 +48,7 @@ namespace Distroir.Bsp
         public void Dispose()
         {
             writer.Dispose();
+            disposed = true;
         }
 
         /// <summary>
@@ -54,6 +56,8 @@ namespace Distroir.Bsp
         /// </summary>
         public void WriteInfo(BspInfo i)
         {
+            ThrowExceptionIfDisposed();
+
             writer.BaseStream.Position = 0;
 
             writer.Write(i.Identifier);
@@ -67,6 +71,8 @@ namespace Distroir.Bsp
 
         private void WriteBspLumpInfo(BspLumpInfo info)
         {
+            ThrowExceptionIfDisposed();
+
             writer.Write(info.FileOffset);
             writer.Write(info.FileLength);
             writer.Write(info.Version);
@@ -79,6 +85,8 @@ namespace Distroir.Bsp
         /// <param name="lumpId">Id of lump to override</param>
         public void WriteBspLumpInfo(BspLumpInfo info, int lumpId)
         {
+            ThrowExceptionIfDisposed();
+
             //Set offset
             writer.BaseStream.Position = BspOffsets.CalculateLumpOffset(lumpId);
             //Write lump data
@@ -93,6 +101,12 @@ namespace Distroir.Bsp
         {
             //Write lump informations
             WriteBspLumpInfo(info, (int)lumpId);
+        }
+
+        private void ThrowExceptionIfDisposed()
+        {
+            if (disposed)
+                throw new ObjectDisposedException(nameof(BspInfoWriter));
         }
     }
 }
