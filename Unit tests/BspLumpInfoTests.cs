@@ -7,7 +7,7 @@ using System.Text;
 namespace UnitTests
 {
     [TestClass]
-    public class BspLumpTests
+    public class BspLumpInfoTests
     {
         [TestMethod]
         public void ExactComparison()
