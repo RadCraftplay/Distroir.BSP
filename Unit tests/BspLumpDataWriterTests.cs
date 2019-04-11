@@ -12,6 +12,8 @@ namespace UnitTests
         const string TEMP_FILENAME = "map.bsp.temp";
         const string OUTPUT_FILENAME = "map_modified.bsp.temp";
         private readonly byte[] exampleData = { 16, 32, 64, 128 };
+        private string exceptionMessage;
+        private string ExceptionMessage => exceptionMessage;
 
         [TestInitialize]
         public void Init()
@@ -24,6 +26,15 @@ namespace UnitTests
                 File.Delete(OUTPUT_FILENAME);
 
             File.Copy(MAP_FILENAME, TEMP_FILENAME);
+
+            try
+            {
+                throw new ObjectDisposedException(nameof(BspLumpDataWriter));
+            }
+            catch (Exception ex)
+            {
+                exceptionMessage = ex.Message;
+            }
         }
 
         [TestCleanup]
@@ -100,6 +111,22 @@ namespace UnitTests
             var writer = new BspLumpDataWriter(TEMP_FILENAME, OUTPUT_FILENAME);
             writer.Dispose();
             writer.WriteLumpData(0, new byte[1] { 1 });
+        }
+
+        [TestMethod]
+        public void WriteDataDisposedMessage()
+        {
+            var writer = new BspLumpDataWriter(TEMP_FILENAME, OUTPUT_FILENAME);
+            writer.Dispose();
+            try
+            {
+                writer.WriteLumpData(0, new byte[1] { 1 });
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, exceptionMessage);
+            }
         }
     }
 }

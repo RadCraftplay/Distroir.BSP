@@ -11,6 +11,21 @@ namespace UnitTests
     public class BspReaderTests
     {
         const string MAP_FILENAME = "testmap.bsp";
+        private string exceptionMessage;
+        private string ExceptionMessage => exceptionMessage;
+
+        [TestInitialize]
+        public void Init()
+        {
+            try
+            {
+                throw new ObjectDisposedException(nameof(BspReader));
+            }
+            catch (Exception ex)
+            {
+                exceptionMessage = ex.Message;
+            }
+        }
 
         [TestMethod]
         public void CtorReadFromBinaryReader()
@@ -153,6 +168,22 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void ReadInfoDisposedMessage()
+        {
+            var reader = new BspReader(MAP_FILENAME);
+            reader.Dispose();
+            try
+            {
+                reader.ReadInfo();
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, exceptionMessage);
+            }
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ObjectDisposedException))]
         public void ReadLumpInfoDisposed()
         {
@@ -162,12 +193,44 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void ReadLumpInfoDisposedMessage()
+        {
+            var reader = new BspReader(MAP_FILENAME);
+            reader.Dispose();
+            try
+            {
+                reader.ReadLumpInfo(0);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, exceptionMessage);
+            }
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ObjectDisposedException))]
         public void ReadLumpDataDisposed()
         {
             var reader = new BspReader(MAP_FILENAME);
             reader.Dispose();
             reader.ReadLumpData(0);
+        }
+
+        [TestMethod]
+        public void ReadLumpDataDisposedMessage()
+        {
+            var reader = new BspReader(MAP_FILENAME);
+            reader.Dispose();
+            try
+            {
+                reader.ReadLumpData(0);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, exceptionMessage);
+            }
         }
     }
 }

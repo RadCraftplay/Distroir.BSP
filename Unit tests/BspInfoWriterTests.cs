@@ -1,5 +1,6 @@
 ﻿using Distroir.Bsp;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.IO;
 
 namespace UnitTests
@@ -13,6 +14,8 @@ namespace UnitTests
         private BspInfo exampleInfo;
         private BspLumpInfo exampleLump;
         private byte[] exampleData = new byte[4] { 16, 32, 64, 128 };
+        private string exceptionMessage;
+        private string ExceptionMessage => exceptionMessage;
 
         [TestInitialize]
         public void Init()
@@ -50,6 +53,15 @@ namespace UnitTests
                 fourCC = 3,
                 Version = 4
             };
+
+            try
+            {
+                throw new ObjectDisposedException(nameof(BspReader));
+            }
+            catch (Exception ex)
+            {
+                exceptionMessage = ex.Message;
+            }
         }
 
         [TestCleanup]
@@ -114,7 +126,7 @@ namespace UnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.ObjectDisposedException))]
+        [ExpectedException(typeof(ObjectDisposedException))]
         public void WriteInfoDisposed()
         {
             var infoWriter = new BspInfoWriter(TEMP_FILENAME);
@@ -124,13 +136,47 @@ namespace UnitTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(System.ObjectDisposedException))]
+        public void WriteInfoDisposedMessage()
+        {
+            var infoWriter = new BspInfoWriter(TEMP_FILENAME);
+            infoWriter.Dispose();
+
+            try
+            {
+                infoWriter.WriteInfo(new BspInfo());
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, exceptionMessage);
+            }
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ObjectDisposedException))]
         public void WriteBspLumpInfoDisposed()
         {
             var infoWriter = new BspInfoWriter(TEMP_FILENAME);
             infoWriter.Dispose();
 
             infoWriter.WriteBspLumpInfo(new BspLumpInfo(), 0);
+        }
+
+        [TestMethod]
+        public void WriteBspLumpInfoDisposedMessage()
+        {
+            var infoWriter = new BspInfoWriter(TEMP_FILENAME);
+            infoWriter.Dispose();
+
+            try
+            {
+                infoWriter.WriteBspLumpInfo(new BspLumpInfo(), 0);
+                Assert.Fail();
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual(ex.Message, exceptionMessage);
+            }
         }
     }
 }
