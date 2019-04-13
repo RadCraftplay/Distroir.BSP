@@ -58,7 +58,7 @@ namespace UnitTests
         [TestMethod]
         public void OneNullComparison()
         {
-            BspLumpInfo one = new BspLumpInfo();
+            var one = new BspLumpInfo();
             BspLumpInfo two = null;
 
             Assert.AreNotEqual(one, two);

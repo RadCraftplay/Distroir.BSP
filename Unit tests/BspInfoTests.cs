@@ -11,7 +11,7 @@ namespace UnitTests
         [TestMethod]
         public void ComparisonTest()
         {
-            BspReader r = new BspReader(MAP_FILENAME);
+            var r = new BspReader(MAP_FILENAME);
             var info1 = r.ReadInfo();
             r.Dispose();
 
@@ -25,7 +25,7 @@ namespace UnitTests
         [TestMethod]
         public void DifferentComparison()
         {
-            BspInfo info = new BspInfo();
+            var info = new BspInfo();
             info.Version = 1;
             info.Identifier = 1;
             info.Lumps = new BspLumpInfo[1]
@@ -40,7 +40,7 @@ namespace UnitTests
             };
             info.MapRevision = 1;
 
-            BspInfo info2 = new BspInfo();
+            var info2 = new BspInfo();
             info2.Version = 1;
             info2.Identifier = 1;
             info2.Lumps = new BspLumpInfo[1]
@@ -64,7 +64,7 @@ namespace UnitTests
         [TestMethod]
         public void OneNullComparison()
         {
-            BspReader r = new BspReader(MAP_FILENAME);
+            var r = new BspReader(MAP_FILENAME);
             var info1 = r.ReadInfo();
             r.Dispose();
 

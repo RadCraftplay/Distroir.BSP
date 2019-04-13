@@ -34,7 +34,7 @@ namespace UnitTests
             {
                 using (var reader = new BinaryReader(stream))
                 {
-                    BspReader r = new BspReader(reader);
+                    var r = new BspReader(reader);
                 }
             }
         }
@@ -42,21 +42,21 @@ namespace UnitTests
         [TestMethod]
         public void CtorReadFile()
         {
-            BspReader r = new BspReader(MAP_FILENAME);
+            var r = new BspReader(MAP_FILENAME);
             r.Dispose();
         }
 
         [TestMethod]
         public void CtorReadFromFileStream()
         {
-            BspReader r = new BspReader(new FileStream(MAP_FILENAME, FileMode.Open));
+            var r = new BspReader(new FileStream(MAP_FILENAME, FileMode.Open));
             r.Dispose();
         }
 
         [TestMethod]
         public void CtorReadFromStream()
         {
-            BspReader r = new BspReader((Stream)(new FileStream(MAP_FILENAME, FileMode.Open)));
+            var r = new BspReader((Stream)(new FileStream(MAP_FILENAME, FileMode.Open)));
             r.Dispose();
         }
 
@@ -65,7 +65,7 @@ namespace UnitTests
         [ExpectedException(typeof(FileFormatException))]
         public void ReadInvalidHeader()
         {
-            BspReader r = new BspReader(NOT_BSP_FILE_FILENAME);
+            var r = new BspReader(NOT_BSP_FILE_FILENAME);
             r.ReadInfo();
             r.Dispose();
         }
@@ -74,7 +74,7 @@ namespace UnitTests
         [ExpectedException(typeof(FileFormatException))]
         public void ReadEmptyFile()
         {
-            BspReader r = new BspReader(EMPTY_FILE_FILENAME);
+            var r = new BspReader(EMPTY_FILE_FILENAME);
             r.ReadInfo();
             r.Dispose();
         }
@@ -83,7 +83,7 @@ namespace UnitTests
         [ExpectedException(typeof(FileFormatException))]
         public void ReadInvalidStream()
         {
-            BspReader r = new BspReader(new MemoryStream());
+            var r = new BspReader(new MemoryStream());
             r.ReadInfo();
             r.Dispose();
         }
@@ -91,7 +91,7 @@ namespace UnitTests
         [TestMethod]
         public void ReadInfo()
         {
-            BspReader r = new BspReader(MAP_FILENAME);
+            var r = new BspReader(MAP_FILENAME);
             var info = r.ReadInfo();
             r.Dispose();
 
@@ -102,7 +102,7 @@ namespace UnitTests
         [TestMethod]
         public void ReadLumpInfo()
         {
-            BspReader r = new BspReader(MAP_FILENAME);
+            var r = new BspReader(MAP_FILENAME);
             var lump = r.ReadLumpInfo(BspLumpType.LUMP_PAKFILE);
             r.Dispose();
 
@@ -113,7 +113,7 @@ namespace UnitTests
         [TestMethod]
         public void ReadLumpInfoById()
         {
-            BspReader r = new BspReader(MAP_FILENAME);
+            var r = new BspReader(MAP_FILENAME);
             var lump = r.ReadLumpInfo(40);
             r.Dispose();
 
@@ -124,7 +124,7 @@ namespace UnitTests
         [TestMethod]
         public void ReadLumpData()
         {
-            BspReader r = new BspReader(MAP_FILENAME);
+            var r = new BspReader(MAP_FILENAME);
             var data = r.ReadLumpData(BspLumpType.LUMP_PAKFILE);
             r.Dispose();
 
@@ -135,7 +135,7 @@ namespace UnitTests
         [TestMethod]
         public void ReadLumpDataById()
         {
-            BspReader r = new BspReader(MAP_FILENAME);
+            var r = new BspReader(MAP_FILENAME);
             var data = r.ReadLumpData(40);
             r.Dispose();
 
@@ -146,7 +146,7 @@ namespace UnitTests
         [TestMethod]
         public void ReadInCustomOrder()
         {
-            BspReader reader = new BspReader(MAP_FILENAME);
+            var reader = new BspReader(MAP_FILENAME);
             var reference = reader.ReadInfo();
             reader.Dispose();
 

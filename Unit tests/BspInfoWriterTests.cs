@@ -73,21 +73,21 @@ namespace UnitTests
         [TestMethod]
         public void CtorOverrideStream()
         {
-            BspInfoWriter w = new BspInfoWriter(new MemoryStream());
+            var w = new BspInfoWriter(new MemoryStream());
             w.Dispose();
         }
 
         [TestMethod]
         public void CtorWriteToFile()
         {
-            BspInfoWriter w = new BspInfoWriter(TEMP_FILENAME);
+            var w = new BspInfoWriter(TEMP_FILENAME);
             w.Dispose();
         }
 
         [TestMethod]
         public void WriteBspInfo()
         {
-            BspInfoWriter writer = new BspInfoWriter(TEMP_FILENAME);
+            var writer = new BspInfoWriter(TEMP_FILENAME);
 
             writer.WriteInfo(exampleInfo);
             writer.Dispose();
@@ -98,7 +98,7 @@ namespace UnitTests
         {
             WriteBspInfo();
 
-            BspReader reader = new BspReader(TEMP_FILENAME);
+            var reader = new BspReader(TEMP_FILENAME);
             var tempInfo = reader.ReadInfo();
             reader.Dispose();
 
@@ -108,7 +108,7 @@ namespace UnitTests
         [TestMethod]
         public void WriteLumpInfo()
         {
-            BspInfoWriter writer = new BspInfoWriter(TEMP_FILENAME);
+            var writer = new BspInfoWriter(TEMP_FILENAME);
             writer.WriteBspLumpInfo(exampleLump, 0);
             writer.Dispose();
         }
@@ -118,7 +118,7 @@ namespace UnitTests
         {
             WriteLumpInfo();
 
-            BspReader reader = new BspReader(TEMP_FILENAME);
+            var reader = new BspReader(TEMP_FILENAME);
             var tempLumpInfo = reader.ReadLumpInfo(0);
             reader.Dispose();
 
