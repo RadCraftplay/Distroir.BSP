@@ -79,7 +79,7 @@ BspLumpInfo info = new BspLumpInfo();
 // Some code
 using (var writer = new BspInfoWriter(filename))
 {
-    writer.WriteBspLumpInfo(info, BspLumpType.LUMP_PAKFILE);
+    writer.WriteBspLumpInfo(BspLumpType.LUMP_PAKFILE, info);
 }
 ```
 
