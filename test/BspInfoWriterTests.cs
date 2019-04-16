@@ -13,7 +13,6 @@ namespace UnitTests
 
         private BspInfo exampleInfo;
         private BspLumpInfo exampleLump;
-        private byte[] exampleData = new byte[4] { 16, 32, 64, 128 };
         private string exceptionMessage;
         private string ExceptionMessage => exceptionMessage;
 

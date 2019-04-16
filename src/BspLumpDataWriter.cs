@@ -72,7 +72,7 @@ namespace Distroir.Bsp
             newBspInfo.Lumps = UpdateLumpInfo(newBspInfo.Lumps, lumpToUpdate, sizeDifference);
 
             infoWriter.WriteInfo(newBspInfo);
-            WriteDataToFile(gatheredInfo.Lumps, newBspInfo.Lumps, lumpId, data);
+            WriteDataToFile(newBspInfo.Lumps, lumpId, data);
         }
 
         public void WriteLumpData(BspLumpType lumpType, byte[] data)
@@ -100,11 +100,10 @@ namespace Distroir.Bsp
             return updatedLumps;
         }
 
-        private void WriteDataToFile(BspLumpInfo[] oldLumps, BspLumpInfo[] newLumps, int modifiedLumpId, byte[] modifiedLumpData)
+        private void WriteDataToFile(BspLumpInfo[] newLumps, int modifiedLumpId, byte[] modifiedLumpData)
         {
             for (int i = 0; i < 64; i++)
             {
-                BspLumpInfo oldLump = oldLumps[i];
                 BspLumpInfo newLump = newLumps[i];
                 byte[] dataToWrite;
 

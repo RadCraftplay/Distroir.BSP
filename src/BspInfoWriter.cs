@@ -27,7 +27,7 @@ namespace Distroir.Bsp
 {
     public class BspInfoWriter : IDisposable
     {
-        BinaryWriter writer;
+        readonly BinaryWriter writer;
         private bool disposed = false;
 
         public BspInfoWriter(BinaryWriter writer)
