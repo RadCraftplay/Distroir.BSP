@@ -75,6 +75,11 @@ namespace Distroir.Bsp
             WriteDataToFile(gatheredInfo.Lumps, newBspInfo.Lumps, lumpId, data);
         }
 
+        public void WriteLumpData(BspLumpType lumpType, byte[] data)
+        {
+            WriteLumpData((int)lumpType, data);
+        }
+
         private BspLumpInfo[] UpdateLumpInfo(BspLumpInfo[] lumps, BspLumpInfo lumpToUpdate, int sizeDifference)
         {
             var updatedLumps = new BspLumpInfo[64];
