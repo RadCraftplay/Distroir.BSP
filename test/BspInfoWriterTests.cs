@@ -109,7 +109,7 @@ namespace UnitTests
         public void WriteLumpInfo()
         {
             var writer = new BspInfoWriter(TEMP_FILENAME);
-            writer.WriteBspLumpInfo(exampleLump, 0);
+            writer.WriteBspLumpInfo(0, exampleLump);
             writer.Dispose();
         }
 
@@ -159,7 +159,7 @@ namespace UnitTests
             var infoWriter = new BspInfoWriter(TEMP_FILENAME);
             infoWriter.Dispose();
 
-            infoWriter.WriteBspLumpInfo(new BspLumpInfo(), 0);
+            infoWriter.WriteBspLumpInfo(0, new BspLumpInfo());
         }
 
         [TestMethod]
@@ -170,7 +170,7 @@ namespace UnitTests
 
             try
             {
-                infoWriter.WriteBspLumpInfo(new BspLumpInfo(), 0);
+                infoWriter.WriteBspLumpInfo(0, new BspLumpInfo());
                 Assert.Fail();
             }
             catch (Exception ex)

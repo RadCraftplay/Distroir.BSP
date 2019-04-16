@@ -83,7 +83,7 @@ namespace Distroir.Bsp
         /// Writes lump info
         /// </summary>
         /// <param name="lumpId">Id of lump to override</param>
-        public void WriteBspLumpInfo(BspLumpInfo info, int lumpId)
+        public void WriteBspLumpInfo(int lumpId, BspLumpInfo info)
         {
             ThrowExceptionIfDisposed();
 
@@ -97,10 +97,10 @@ namespace Distroir.Bsp
         /// Writes lump info
         /// </summary>
         /// <param name="lumpId">Id of lump to override</param>
-        public void WriteBspLumpInfo(BspLumpInfo info, BspLumpType lumpId)
+        public void WriteBspLumpInfo(BspLumpType lumpId, BspLumpInfo info)
         {
             //Write lump informations
-            WriteBspLumpInfo(info, (int)lumpId);
+            WriteBspLumpInfo((int)lumpId, info);
         }
 
         private void ThrowExceptionIfDisposed()
