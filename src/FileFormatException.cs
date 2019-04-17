@@ -26,6 +26,6 @@ namespace Distroir.Bsp
 {
     public class FileFormatException : Exception
     {
-        public override string Message => "Invalid file format!";
+        public override string Message => "File you are trying to read is not valid BSP file";
     }
 }
