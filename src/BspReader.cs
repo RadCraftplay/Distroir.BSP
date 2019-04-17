@@ -101,6 +101,7 @@ namespace Distroir.Bsp
             //Return value
             return info;
         }
+
         /// <summary>
         /// Reads lump from Binary Reader
         /// </summary>
