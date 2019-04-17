@@ -20,12 +20,28 @@ OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 */
-using System;
-
 namespace Distroir.Bsp
 {
-    internal class FileFormatException : Exception
+    internal class BspOffsets
     {
-        public override string Message => "Invalid file format!";
+        /// <summary>
+        /// Calculates offset of lump
+        /// </summary>
+        /// <param name="lumpId">Id of lump (from 0 to 63)</param>
+        /// <returns></returns>
+        public static int CalculateLumpOffset(int lumpId)
+        {
+            return 8 + 16 * lumpId;
+        }
+
+        /// <summary>
+        /// Calculates offset of lump
+        /// </summary>
+        /// <param name="lump">Lump type</param>
+        /// <returns></returns>
+        public static int CalculateLumpOffset(BspLumpType lump)
+        {
+            return CalculateLumpOffset((int)lump);
+        }
     }
 }

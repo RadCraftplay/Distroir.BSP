@@ -20,25 +20,58 @@ OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 IN THE SOFTWARE.
 */
+
 namespace Distroir.Bsp
 {
-    public class BspLump
+    public class BspLumpInfo
     {
         /// <summary>
         /// Offset into file (bytes)
         /// </summary>
-        public int FileOffset;
+        public int FileOffset { get; set; }
         /// <summary>
         /// Length of lump (bytes)
         /// </summary>
-        public int FileLength;
+        public int FileLength { get; set; }
         /// <summary>
         /// Lump format version
         /// </summary>
-        public int Version;
+        public int Version { get; set; }
         /// <summary>
         /// Lump ident code
         /// </summary>
-        public int fourCC;
+        public int fourCC { get; set; }
+
+        public override bool Equals(object obj)
+        {
+            return obj is BspLumpInfo lump &&
+                   FileOffset == lump.FileOffset &&
+                   FileLength == lump.FileLength &&
+                   Version == lump.Version &&
+                   fourCC == lump.fourCC;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = -345481539;
+            hashCode = hashCode * -1521134295 + FileOffset.GetHashCode();
+            hashCode = hashCode * -1521134295 + FileLength.GetHashCode();
+            hashCode = hashCode * -1521134295 + Version.GetHashCode();
+            hashCode = hashCode * -1521134295 + fourCC.GetHashCode();
+            return hashCode;
+        }
+
+        public static bool operator ==(BspLumpInfo left, BspLumpInfo right)
+        {
+            if (object.ReferenceEquals(null, left))
+                return object.ReferenceEquals(null, right);
+            else
+                return left.Equals(right);
+        }
+
+        public static bool operator !=(BspLumpInfo left, BspLumpInfo right)
+        {
+            return !(left == right);
+        }
     }
 }
