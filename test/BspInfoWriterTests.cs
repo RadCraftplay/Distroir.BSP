@@ -106,6 +106,33 @@ namespace UnitTests
         }
 
         [TestMethod]
+        public void CtorNullWriter()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var w = new BspInfoWriter((BinaryWriter)null);
+            });
+        }
+
+        [TestMethod]
+        public void CtorNullStream()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var w = new BspInfoWriter((Stream)null);
+            });
+        }
+
+        [TestMethod]
+        public void CtorNullFilename()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() =>
+            {
+                var w = new BspInfoWriter((string)null);
+            });
+        }
+
+        [TestMethod]
         public void WriteBspInfo()
         {
             var writer = new BspInfoWriter(TEMP_FILENAME);

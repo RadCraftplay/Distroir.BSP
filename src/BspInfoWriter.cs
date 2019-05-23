@@ -32,16 +32,25 @@ namespace Distroir.Bsp
 
         public BspInfoWriter(BinaryWriter writer)
         {
+            if (writer == null)
+                throw new ArgumentNullException("The value of \"writer\" is null");
+
             this.writer = writer;
         }
 
         public BspInfoWriter(Stream outputStream)
         {
+            if (outputStream == null)
+                throw new ArgumentNullException("The value of \"outputStream\" is null");
+
             writer = new BinaryWriter(outputStream);
         }
 
         public BspInfoWriter(string filename)
         {
+            if (filename == null)
+                throw new ArgumentNullException("The value of \"filename\" is null");
+
             writer = new BinaryWriter(new FileStream(filename, FileMode.Open));
         }
 
