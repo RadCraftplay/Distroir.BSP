@@ -106,30 +106,24 @@ namespace UnitTests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CtorNullWriter()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                var w = new BspInfoWriter((BinaryWriter)null);
-            });
+            var w = new BspInfoWriter((BinaryWriter)null);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CtorNullStream()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                var w = new BspInfoWriter((Stream)null);
-            });
+            var w = new BspInfoWriter((Stream)null);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
         public void CtorNullFilename()
         {
-            Assert.ThrowsException<ArgumentNullException>(() =>
-            {
-                var w = new BspInfoWriter((string)null);
-            });
+            var w = new BspInfoWriter((string)null);
         }
 
         [TestMethod]
