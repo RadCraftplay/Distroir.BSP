@@ -71,13 +71,73 @@ namespace UnitTests
             var writer = new BspLumpDataWriter(TEMP_FILENAME, OUTPUT_FILENAME);
             writer.Dispose();
         }
-        
+
         [TestMethod]
         public void CtorWriteToStream()
         {
             var writer = new BspLumpDataWriter(new FileStream(TEMP_FILENAME, FileMode.Open),
                 new FileStream(OUTPUT_FILENAME, FileMode.CreateNew));
             writer.Dispose();
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorNullFilenames()
+        {
+            var writer = new BspLumpDataWriter((string)null, (string)null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorFirstFilenameNull()
+        {
+            var writer = new BspLumpDataWriter(null, OUTPUT_FILENAME);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorSecondFilenameNull()
+        {
+            var writer = new BspLumpDataWriter(TEMP_FILENAME, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorNullStreams()
+        {
+            var writer = new BspLumpDataWriter((Stream)null, (Stream)null);
+        }
+
+        [TestMethod]
+        public void CtorFirstStreamNull()
+        {
+            var outputStream = new FileStream(OUTPUT_FILENAME, FileMode.CreateNew);
+
+            var ex = ExceptionUtils.GetThrownException(() =>
+            {
+                var writer = new BspLumpDataWriter(null, outputStream);
+            });
+
+            outputStream.Close();
+            Assert.IsInstanceOfType(ex, typeof(ArgumentNullException));
+        }
+
+        [TestMethod]
+        public void CtorSecondStreamNull()
+        {
+            if (File.Exists(TEMP_FILENAME))
+                File.Delete(TEMP_FILENAME);
+
+            var inputStream = new FileStream(TEMP_FILENAME, FileMode.CreateNew);
+
+            var ex = ExceptionUtils.GetThrownException(() =>
+            {
+                var writer = new BspLumpDataWriter(inputStream,
+                    (Stream)null);
+            });
+
+            inputStream.Close();
+            Assert.IsInstanceOfType(ex, typeof(ArgumentNullException));
         }
 
         [TestMethod]

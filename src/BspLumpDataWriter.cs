@@ -34,11 +34,23 @@ namespace Distroir.Bsp
 
         public BspLumpDataWriter(Stream input, Stream output)
         {
+            if (input == null)
+                throw new ArgumentNullException("input");
+
+            if (output == null)
+                throw new ArgumentNullException("output");
+
             InitializeWriter(input, output);
         }
 
         public BspLumpDataWriter(string inputFilename, string outputFilename)
         {
+            if (inputFilename == null)
+                throw new ArgumentNullException("inputFilename");
+
+            if (outputFilename == null)
+                throw new ArgumentNullException("outputFilename");
+
             InitializeWriter(new FileStream(inputFilename, FileMode.Open),
                 new FileStream(outputFilename, FileMode.CreateNew));
         }
