@@ -33,16 +33,22 @@ namespace Distroir.Bsp
 
         public BspReader(BinaryReader reader)
         {
-            this.reader = reader;
+            this.reader = reader ?? throw new ArgumentNullException("reader");
         }
 
         public BspReader(Stream input)
         {
+            if (input == null)
+                throw new ArgumentNullException("input");
+
             reader = new BinaryReader(input);
         }
 
         public BspReader(string filename)
         {
+            if (filename == null)
+                throw new ArgumentNullException("filename");
+
             reader = new BinaryReader(new FileStream(filename, FileMode.Open));
         }
 

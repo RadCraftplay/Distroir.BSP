@@ -82,6 +82,34 @@ namespace UnitTests
             r.Dispose();
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorReadFromNullBinaryReader()
+        {
+            var r = new BspReader((BinaryReader)null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorReadFromNullFile()
+        {
+            var r = new BspReader((string)null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorReadFromNullFileStream()
+        {
+            var r = new BspReader((FileStream)null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorReadFromNullStream()
+        {
+            var r = new BspReader((Stream)null);
+        }
+
 
         [TestMethod]
         [ExpectedException(typeof(FileFormatException))]
