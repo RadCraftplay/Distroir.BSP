@@ -4,7 +4,7 @@ namespace UnitTests
 {
     internal class ExceptionUtils
     {
-        public static Exception GetThrownException(Action action)
+        public static Exception GetExceptionIfThrown(Action action)
         {
             try
             {

@@ -113,7 +113,7 @@ namespace UnitTests
         {
             var outputStream = new FileStream(OUTPUT_FILENAME, FileMode.CreateNew);
 
-            var ex = ExceptionUtils.GetThrownException(() =>
+            var ex = ExceptionUtils.GetExceptionIfThrown(() =>
             {
                 var writer = new BspLumpDataWriter(null, outputStream);
             });
@@ -130,7 +130,7 @@ namespace UnitTests
 
             var inputStream = new FileStream(TEMP_FILENAME, FileMode.CreateNew);
 
-            var ex = ExceptionUtils.GetThrownException(() =>
+            var ex = ExceptionUtils.GetExceptionIfThrown(() =>
             {
                 var writer = new BspLumpDataWriter(inputStream,
                     (Stream)null);
